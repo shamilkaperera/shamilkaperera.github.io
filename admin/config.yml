@@ -1,0 +1,40 @@
+backend:
+  name: github
+  repo: shamilkaperera/shamilkaperera.github.io # MAKE SURE TO CHANGE THIS
+  branch: main
+
+media_folder: "images" 
+public_folder: "/images"
+
+collections:
+  - name: "engineering"
+    label: "⚙️ Engineering Projects"
+    folder: "engineering-work"
+    create: true
+    fields:
+      - {label: "Project Title", name: "title", widget: "string"}
+      # This creates a gallery that allows 1 to 10 images
+      - label: "Project Images (Min 1, Max 10)"
+        name: "gallery"
+        widget: "list"
+        min: 1
+        max: 10
+        field: {label: "Image", name: "image", widget: "image"}
+      - {label: "Short Description", name: "description", widget: "text"}
+      - {label: "Full Details/Body", name: "body", widget: "markdown"}
+
+  - name: "creator"
+    label: "🎬 Creator & 3D Work"
+    folder: "creator-work"
+    create: true
+    fields:
+      - {label: "Video/Project Title", name: "title", widget: "string"}
+      # Gallery for Creator work
+      - label: "Project Images (Min 1, Max 10)"
+        name: "gallery"
+        widget: "list"
+        min: 1
+        max: 10
+        field: {label: "Image", name: "image", widget: "image"}
+      - {label: "Short Description", name: "description", widget: "text"}
+      - {label: "YouTube Link or Details", name: "body", widget: "markdown"}
