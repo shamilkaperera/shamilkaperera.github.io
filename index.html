@@ -24,12 +24,13 @@
                     <span class="text-blue-500">MECH</span> <span class="text-gray-400">x</span> <span class="text-emerald-400">CREATIVE</span>
                 </div>
                 <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-4">
+                    <div class="ml-10 flex items-center space-x-4">
                         <button onclick="switchTab('home')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:text-blue-400 transition" id="btn-home">Home</button>
                         <button onclick="switchTab('creator')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:text-blue-400 transition" id="btn-creator">Creator</button>
                         <button onclick="switchTab('engineering')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:text-blue-400 transition" id="btn-engineering">Engineering</button>
                         <button onclick="switchTab('blog')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:text-blue-400 transition" id="btn-blog">Blog</button>
                         <button onclick="switchTab('contact')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:text-blue-400 transition" id="btn-contact">Contact</button>
+                        
                         <a href="/admin/index.html" class="ml-4 text-gray-600 hover:text-emerald-400 transition text-sm"><i class="fas fa-lock"></i> Admin</a>
                     </div>
                 </div>
@@ -46,18 +47,20 @@
                         Engineering Mechanisms.<br>
                         <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Directing Realities.</span>
                     </h1>
+                    
                     <p class="text-gray-400 text-lg mb-8 max-w-lg">
-                        I'm a Mechanical Engineering undergrad at University of Peradeniya and a professional 3D Artist. My goal is to bridge these two worlds, using high-end visuals to make complex engineering easy to understand.
+                        I am a Mechanical Engineering student at the University of Peradeniya, but my main focus is building a career as a professional Content Creator and 3D Visual Artist.
                     </p>
+                    
                     <div class="flex space-x-4">
                         <button onclick="switchTab('creator')" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition transform hover:-translate-y-1">View Creator Portfolio</button>
                         <button onclick="switchTab('engineering')" class="bg-transparent border border-gray-600 hover:border-gray-400 text-white font-semibold py-3 px-6 rounded-lg transition">Engineering Work</button>
                     </div>
                 </div>
                 <div class="md:w-1/2 mt-10 md:mt-0 flex justify-center">
-                    <div class="w-72 h-72 md:w-96 md:h-96 rounded-full bg-gradient-to-tr from-blue-900 to-gray-800 border-4 border-gray-800 shadow-2xl flex items-center justify-center text-gray-500">
-                        <i class="fas fa-camera text-5xl mr-4"></i> <i class="fas fa-cogs text-5xl"></i>
-                    </div>
+                    
+                    <img src="profile.jpg" alt="My Profile Picture" class="w-72 h-72 md:w-96 md:h-96 rounded-full object-cover border-4 border-gray-800 shadow-2xl">
+                    
                 </div>
             </div>
         </section>
@@ -94,7 +97,7 @@
                         <i class="fas fa-drafting-compass text-4xl text-gray-600"></i>
                     </div>
                     <div class="p-5">
-                        <h3 class="text-xl font-bold mb-2">SolidWorks Fruit Slicer</h3>
+                        <h3 class="text-xl font-bold mb-2">SolidWorks CNC Spindle</h3>
                         <p class="text-gray-400 text-sm">CAD design and structural analysis of a high-speed milling spindle.</p>
                     </div>
                 </div>
@@ -128,12 +131,11 @@
                 <form onsubmit="event.preventDefault(); alert('In the future, this will send an email!');">
                     <div class="mb-4">
                         <label class="block text-gray-400 mb-2">Name</label>
-                        <input type="text" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="Shamilka Perera">
+                        <input type="text" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="Your Name">
                     </div>
                     <div class="mb-4">
                         <label class="block text-gray-400 mb-2">Email</label>
-                        <input type="email" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="connectshamilkaperera@gmail.com
-">
+                        <input type="email" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="email@example.com">
                     </div>
                     <div class="mb-6">
                         <label class="block text-gray-400 mb-2">Message</label>
