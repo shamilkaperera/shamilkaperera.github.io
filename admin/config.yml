@@ -1,40 +1,61 @@
 backend:
   name: github
-  repo: shamilkaperera/shamilkaperera.github.io # MAKE SURE TO CHANGE THIS
+  repo: shamilkaperera/shamilkaperera.github.io # CHANGE THIS
   branch: main
 
 media_folder: "images" 
 public_folder: "/images"
 
 collections:
+  # 1. Engineering Projects
   - name: "engineering"
     label: "⚙️ Engineering Projects"
     folder: "engineering-work"
     create: true
     fields:
       - {label: "Project Title", name: "title", widget: "string"}
-      # This creates a gallery that allows 1 to 10 images
-      - label: "Project Images (Min 1, Max 10)"
+      - {label: "MAIN THUMBNAIL (Shows on Homepage)", name: "thumbnail", widget: "image"}
+      - {label: "Short Description", name: "description", widget: "text"}
+      - label: "Extra Project Images (Min 1, Max 10)"
         name: "gallery"
         widget: "list"
-        min: 1
-        max: 10
+        required: false
         field: {label: "Image", name: "image", widget: "image"}
-      - {label: "Short Description", name: "description", widget: "text"}
       - {label: "Full Details/Body", name: "body", widget: "markdown"}
 
+  # 2. Creator Work
   - name: "creator"
     label: "🎬 Creator & 3D Work"
     folder: "creator-work"
     create: true
     fields:
       - {label: "Video/Project Title", name: "title", widget: "string"}
-      # Gallery for Creator work
-      - label: "Project Images (Min 1, Max 10)"
+      - {label: "MAIN THUMBNAIL (Shows on Homepage)", name: "thumbnail", widget: "image"}
+      - {label: "Short Description", name: "description", widget: "text"}
+      - label: "Extra Project Images (Min 1, Max 10)"
         name: "gallery"
         widget: "list"
-        min: 1
-        max: 10
+        required: false
         field: {label: "Image", name: "image", widget: "image"}
-      - {label: "Short Description", name: "description", widget: "text"}
       - {label: "YouTube Link or Details", name: "body", widget: "markdown"}
+
+  # 3. Blog Articles
+  - name: "blog"
+    label: "📝 Blog Articles"
+    folder: "posts"
+    create: true
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Cover Image", name: "thumbnail", widget: "image"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Article Text", name: "body", widget: "markdown"}
+
+  # 4. NEW: Site Settings (For your Profile Picture)
+  - name: "settings"
+    label: "🛠️ Site Settings"
+    files:
+      - label: "Homepage Settings"
+        name: "homepage"
+        file: "settings.json"
+        fields:
+          - {label: "Profile Picture (Upload a Square Image!)", name: "profile_pic", widget: "image"}
