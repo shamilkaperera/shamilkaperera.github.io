@@ -13,90 +13,115 @@
         .tab-content { display: none; animation: fadeIn 0.4s ease-in-out; }
         .tab-content.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .card-gradient { background: linear-gradient(145deg, #171E2E, #0B0F19); }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
 
     <nav class="glass-nav sticky top-0 z-50 border-b border-gray-800">
-        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-            <div class="font-bold text-xl tracking-tighter">
-                <span class="text-blue-500">MECH</span><span class="text-emerald-400 font-light">CREATIVE</span>
-            </div>
-            <div class="flex items-center space-x-6">
-                <button onclick="switchTab('home')" class="nav-btn text-sm font-medium hover:text-blue-400 transition" id="btn-home">Home</button>
-                <button onclick="switchTab('creator')" class="nav-btn text-sm font-medium hover:text-blue-400 transition" id="btn-creator">Creator</button>
-                <button onclick="switchTab('engineering')" class="nav-btn text-sm font-medium hover:text-blue-400 transition" id="btn-engineering">Engineering</button>
-                <button onclick="switchTab('blog')" class="nav-btn text-sm font-medium hover:text-blue-400 transition" id="btn-blog">Blog</button>
-                <a href="/admin/index.html" class="text-gray-500 hover:text-emerald-400 transition text-sm"><i class="fas fa-lock"></i></a>
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0 font-bold text-xl tracking-wider">
+                    <span class="text-blue-500">MECH</span> <span class="text-gray-400">x</span> <span class="text-emerald-400">CREATIVE</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-4">
+                        <button onclick="switchTab('home')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:text-blue-400 transition" id="btn-home">Home</button>
+                        <button onclick="switchTab('creator')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:text-blue-400 transition" id="btn-creator">Creator</button>
+                        <button onclick="switchTab('engineering')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:text-blue-400 transition" id="btn-engineering">Engineering</button>
+                        <button onclick="switchTab('blog')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:text-blue-400 transition" id="btn-blog">Blog</button>
+                        <button onclick="switchTab('contact')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:text-blue-400 transition" id="btn-contact">Contact</button>
+                        
+                        <a href="/admin/index.html" class="ml-4 text-gray-600 hover:text-emerald-400 transition text-sm"><i class="fas fa-lock"></i> Admin</a>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
 
-    <main class="flex-grow max-w-6xl mx-auto px-4 py-12 w-full">
+    <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
 
         <section id="home" class="tab-content active">
-            <div class="flex flex-col md:flex-row items-center justify-between pt-10">
-                <div class="md:w-3/5">
-                    <h1 class="text-5xl md:text-7xl font-extrabold mb-6">
-                        Engineering <span class="text-blue-500">Mind.</span><br>
-                        Creative <span class="text-emerald-400">Soul.</span>
+            <div class="flex flex-col md:flex-row items-center justify-between mt-10">
+                <div class="md:w-1/2">
+                    <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
+                        Engineering Mechanisms.<br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Directing Realities.</span>
                     </h1>
-                    <p class="text-gray-400 text-lg mb-8 leading-relaxed max-w-lg">
+                    
+                    <p class="text-gray-400 text-lg mb-8 max-w-lg">
                         I am a Mechanical Engineering student at the University of Peradeniya, but my main focus is building a career as a professional Content Creator and 3D Visual Artist.
                     </p>
+                    
                     <div class="flex space-x-4">
-                        <button onclick="switchTab('creator')" class="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-full font-bold transition">View Portfolio</button>
+                        <button onclick="switchTab('creator')" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition transform hover:-translate-y-1">View Creator Portfolio</button>
+                        <button onclick="switchTab('engineering')" class="bg-transparent border border-gray-600 hover:border-gray-400 text-white font-semibold py-3 px-6 rounded-lg transition">Engineering Work</button>
                     </div>
                 </div>
-                <div class="md:w-2/5 mt-12 md:mt-0 flex justify-center">
-                    <img id="profile-img" src="profile.jpg" class="w-64 h-64 md:w-80 md:h-80 rounded-full object-cover border-8 border-gray-800 shadow-2xl">
+                <div class="md:w-1/2 mt-10 md:mt-0 flex justify-center">
+                    <img id="profile-img" src="profile.jpg" alt="My Profile Picture" class="w-72 h-72 md:w-96 md:h-96 rounded-full object-cover border-4 border-gray-800 shadow-2xl">
                 </div>
             </div>
         </section>
 
         <section id="creator" class="tab-content">
-            <h2 class="text-3xl font-bold mb-8 border-l-4 border-emerald-400 pl-4 text-emerald-400">Content & 3D</h2>
+            <h2 class="text-3xl font-bold mb-8 border-b border-gray-800 pb-4 text-emerald-400">Content Creation & 3D</h2>
             <div id="creator-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <p class="text-gray-600 italic">No projects uploaded yet...</p>
+                <p class="text-gray-500 italic">Visit the Admin panel to add your first Creator project.</p>
             </div>
         </section>
 
         <section id="engineering" class="tab-content">
-            <h2 class="text-3xl font-bold mb-8 border-l-4 border-blue-500 pl-4 text-blue-500">Engineering Work</h2>
+            <h2 class="text-3xl font-bold mb-8 border-b border-gray-800 pb-4 text-blue-500">Engineering Projects</h2>
             <div id="engineering-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <p class="text-gray-600 italic">No engineering work uploaded yet...</p>
+                <p class="text-gray-500 italic">Visit the Admin panel to add your first Engineering project.</p>
             </div>
         </section>
 
         <section id="blog" class="tab-content">
-            <h2 class="text-3xl font-bold mb-8 border-l-4 border-gray-500 pl-4 text-gray-400">Insights</h2>
+            <h2 class="text-3xl font-bold mb-8 border-b border-gray-800 pb-4 text-gray-400">Articles & Thoughts</h2>
             <div id="blog-list" class="space-y-6 max-w-3xl">
-                </div>
+                <p class="text-gray-500 italic">Write your first post in the Admin dashboard.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="tab-content">
+            <div class="max-w-2xl mx-auto bg-gray-800 p-8 rounded-xl border border-gray-700 mt-10">
+                <h2 class="text-3xl font-bold mb-6 text-center">Let's Build Something</h2>
+                <form onsubmit="event.preventDefault(); alert('Message sent!');">
+                    <div class="mb-4 text-left">
+                        <label class="block text-gray-400 mb-2">Name</label>
+                        <input type="text" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="Your Name">
+                    </div>
+                    <div class="mb-4 text-left">
+                        <label class="block text-gray-400 mb-2">Email</label>
+                        <input type="email" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="email@example.com">
+                    </div>
+                    <div class="mb-6 text-left">
+                        <label class="block text-gray-400 mb-2">Message</label>
+                        <textarea class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 h-32" placeholder="Tell me about your project..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-emerald-500 text-white font-bold py-3 rounded-lg transition shadow-lg">Send Message</button>
+                </form>
+            </div>
         </section>
 
     </main>
 
     <script>
-        // TAB SWITCHING LOGIC
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('text-blue-400', 'text-emerald-400'));
             
             document.getElementById(tabId).classList.add('active');
-            const activeBtn = document.getElementById('btn-' + tabId);
-            if (activeBtn) activeBtn.classList.add(tabId === 'creator' ? 'text-emerald-400' : 'text-blue-400');
+            const btn = document.getElementById('btn-' + tabId);
+            if(btn) btn.classList.add(tabId === 'creator' ? 'text-emerald-400' : 'text-blue-400');
         }
 
-        // LOAD PROFILE PIC SETTINGS
+        // LOAD DYNAMIC DP FROM CMS
         fetch('settings.json')
             .then(res => res.json())
             .then(data => { if(data.profile_pic) document.getElementById('profile-img').src = data.profile_pic; })
-            .catch(e => console.log("Using default DP"));
-
-        // PLACEHOLDER FOR PROJECT LOADING
-        // In a static site, you usually use a 'List API' or just manually link.
-        // For now, these grids will fill up as you add files to /creator-work and /engineering-work via the CMS.
+            .catch(e => console.log("Using default profile.jpg"));
     </script>
 </body>
 </html>
