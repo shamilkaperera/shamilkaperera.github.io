@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mech x Creative | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #0B0F19; color: #ffffff; }
+        .glass-nav { background: rgba(11, 15, 25, 0.8); backdrop-filter: blur(10px); }
+        .tab-content { display: none; animation: fadeIn 0.4s ease-in-out; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <nav class="glass-nav sticky top-0 z-50 border-b border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0 font-bold text-xl tracking-wider">
+                    <span class="text-blue-500">MECH</span> <span class="text-gray-400">x</span> <span class="text-emerald-400">CREATIVE</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <button onclick="switchTab('home')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:text-blue-400 transition" id="btn-home">Home</button>
+                        <button onclick="switchTab('creator')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:text-blue-400 transition" id="btn-creator">Creator</button>
+                        <button onclick="switchTab('engineering')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:text-blue-400 transition" id="btn-engineering">Engineering</button>
+                        <button onclick="switchTab('blog')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:text-blue-400 transition" id="btn-blog">Blog</button>
+                        <button onclick="switchTab('contact')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:text-blue-400 transition" id="btn-contact">Contact</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
+
+        <section id="home" class="tab-content active">
+            <div class="flex flex-col md:flex-row items-center justify-between mt-10">
+                <div class="md:w-1/2">
+                    <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
+                        Engineering Mechanisms.<br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Directing Realities.</span>
+                    </h1>
+                    <p class="text-gray-400 text-lg mb-8 max-w-lg">
+                        I am a Mechanical Engineering student bridging the gap between heavy industry and high-end visual content. Specializing in 3D modeling, technical video production, and industrial design.
+                    </p>
+                    <div class="flex space-x-4">
+                        <button onclick="switchTab('creator')" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition transform hover:-translate-y-1">View Creator Portfolio</button>
+                        <button onclick="switchTab('engineering')" class="bg-transparent border border-gray-600 hover:border-gray-400 text-white font-semibold py-3 px-6 rounded-lg transition">Engineering Work</button>
+                    </div>
+                </div>
+                <div class="md:w-1/2 mt-10 md:mt-0 flex justify-center">
+                    <div class="w-72 h-72 md:w-96 md:h-96 rounded-full bg-gradient-to-tr from-blue-900 to-gray-800 border-4 border-gray-800 shadow-2xl flex items-center justify-center text-gray-500">
+                        <i class="fas fa-camera text-5xl mr-4"></i> <i class="fas fa-cogs text-5xl"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="creator" class="tab-content">
+            <h2 class="text-3xl font-bold mb-8 border-b border-gray-800 pb-4"><i class="fas fa-video text-emerald-400 mr-2"></i> Content Creation & 3D</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-800 rounded-xl overflow-hidden hover:shadow-[0_0_15px_rgba(16,185,129,0.3)] transition transform hover:-translate-y-2 cursor-pointer border border-gray-700">
+                    <div class="h-48 bg-gray-900 flex items-center justify-center group relative">
+                        <i class="fas fa-play text-4xl text-gray-600 group-hover:text-emerald-400 transition"></i>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold mb-2">Industrial Plant B-Roll</h3>
+                        <p class="text-gray-400 text-sm">Cinematic documentation of automated production lines.</p>
+                    </div>
+                </div>
+                <div class="bg-gray-800 rounded-xl overflow-hidden hover:shadow-[0_0_15px_rgba(16,185,129,0.3)] transition transform hover:-translate-y-2 cursor-pointer border border-gray-700">
+                    <div class="h-48 bg-gray-900 flex items-center justify-center group">
+                        <i class="fas fa-cube text-4xl text-gray-600 group-hover:text-emerald-400 transition"></i>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold mb-2">Blender 3D Product Ad</h3>
+                        <p class="text-gray-400 text-sm">Photorealistic rendering of an HVAC component.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="engineering" class="tab-content">
+            <h2 class="text-3xl font-bold mb-8 border-b border-gray-800 pb-4"><i class="fas fa-wrench text-blue-500 mr-2"></i> Engineering Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-800 rounded-xl overflow-hidden hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] transition transform hover:-translate-y-2 cursor-pointer border border-gray-700">
+                    <div class="h-48 bg-gray-900 flex items-center justify-center">
+                        <i class="fas fa-drafting-compass text-4xl text-gray-600"></i>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold mb-2">SolidWorks CNC Spindle</h3>
+                        <p class="text-gray-400 text-sm">CAD design and structural analysis of a high-speed milling spindle.</p>
+                    </div>
+                </div>
+                <div class="bg-gray-800 rounded-xl overflow-hidden hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] transition transform hover:-translate-y-2 cursor-pointer border border-gray-700">
+                    <div class="h-48 bg-gray-900 flex items-center justify-center">
+                        <i class="fas fa-chart-line text-4xl text-gray-600"></i>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold mb-2">MATLAB Vibration Simulation</h3>
+                        <p class="text-gray-400 text-sm">Dynamic modeling of multi-degree freedom systems.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="blog" class="tab-content">
+            <h2 class="text-3xl font-bold mb-8 border-b border-gray-800 pb-4"><i class="fas fa-pen-nib text-gray-400 mr-2"></i> Articles & Thoughts</h2>
+            <div class="space-y-6 max-w-3xl">
+                <article class="bg-gray-800 p-6 rounded-xl border border-gray-700 hover:border-blue-500 transition">
+                    <p class="text-blue-400 text-sm font-semibold mb-1">March 2026</p>
+                    <h3 class="text-2xl font-bold mb-3">Why Mechanical Engineers Make Great Video Editors</h3>
+                    <p class="text-gray-400 mb-4">The parallels between timeline rendering, data bitrates, and fluid dynamics in project management.</p>
+                    <a href="#" class="text-emerald-400 hover:text-emerald-300 font-medium">Read Article &rarr;</a>
+                </article>
+            </div>
+        </section>
+
+        <section id="contact" class="tab-content">
+            <div class="max-w-2xl mx-auto bg-gray-800 p-8 rounded-xl border border-gray-700 mt-10">
+                <h2 class="text-3xl font-bold mb-6 text-center">Let's Build Something</h2>
+                <form onsubmit="event.preventDefault(); alert('In the future, this will send an email!');">
+                    <div class="mb-4">
+                        <label class="block text-gray-400 mb-2">Name</label>
+                        <input type="text" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="John Doe">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-400 mb-2">Email</label>
+                        <input type="email" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500" placeholder="john@example.com">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-400 mb-2">Message</label>
+                        <textarea class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 h-32" placeholder="Tell me about your project..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-emerald-500 hover:from-blue-500 hover:to-emerald-400 text-white font-bold py-3 px-4 rounded-lg transition shadow-lg">Send Message</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function switchTab(tabId) {
+            // Hide all sections
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            // Remove active color from all nav buttons
+            document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('text-blue-400'));
+            
+            // Show selected section
+            document.getElementById(tabId).classList.add('active');
+            // Add active color to clicked nav button
+            document.getElementById('btn-' + tabId).classList.add('text-blue-400');
+        }
+        // Set home button as active on load
+        document.getElementById('btn-home').classList.add('text-blue-400');
+    </script>
+</body>
+</html>
