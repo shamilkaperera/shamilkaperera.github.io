@@ -1,5 +1,6 @@
 ---
 title: 🖤Jaguar F - Type🖤UE5_Ancient temple environment
+date: 2026-02-28T14:08:00
 thumbnail: /images/579885519_122282509832068965_6873237698107563417_n.jpg
 description: A cinematic exploration of contrast, built entirely in Unreal Engine 5. This scene juxtaposes the modern, aerodynamic design of a Jaguar F-Type against the decaying, overgrown ruins of an ancient temple. Leveraging UE5's real-time lighting and geometry systems, the environment was designed to create a moody, hyper-realistic cinematic atmosphere.
 gallery:
