@@ -1,5 +1,6 @@
 ---
 title: 🖤Lamborghini Urus🖤 UE5
+date: 2025-02-28T14:08:00
 thumbnail: /images/474657436_122229472028068965_698137979488748085_n.jpg
 description: Deep in the jungle. This cinematic real-time render takes the Lamborghini Urus far off the pavement and into a dense, tropical rainforest. Built completely in Unreal Engine 5, this scene focuses on the interplay of natural light piercing through the heavy canopy and reflecting off the vehicle's sharp, aerodynamic angles
 gallery:
