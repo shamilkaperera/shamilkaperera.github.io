@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: shamilkaperera/shamilkaperera.github.io # CHANGE THIS
+  repo: shamilkaperera/shamilkaperera.github.io
   branch: main
 
 media_folder: "images" 
@@ -12,8 +12,10 @@ collections:
     label: "⚙️ Engineering Projects"
     folder: "engineering-work"
     create: true
+    sortable_fields: ['date', 'title']
     fields:
       - {label: "Project Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
       - {label: "MAIN THUMBNAIL (Shows on Homepage)", name: "thumbnail", widget: "image"}
       - {label: "Short Description", name: "description", widget: "text"}
       - label: "Extra Project Images (Min 1, Max 10)"
@@ -28,8 +30,10 @@ collections:
     label: "🎬 Creator & 3D Work"
     folder: "creator-work"
     create: true
+    sortable_fields: ['date', 'title']
     fields:
       - {label: "Video/Project Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
       - {label: "MAIN THUMBNAIL (Shows on Homepage)", name: "thumbnail", widget: "image"}
       - {label: "Short Description", name: "description", widget: "text"}
       - label: "Extra Project Images (Min 1, Max 10)"
@@ -44,13 +48,14 @@ collections:
     label: "📝 Blog Articles"
     folder: "posts"
     create: true
+    sortable_fields: ['date', 'title']
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Cover Image", name: "thumbnail", widget: "image"}
       - {label: "Publish Date", name: "date", widget: "datetime"}
       - {label: "Article Text", name: "body", widget: "markdown"}
 
-  # 4. NEW: Site Settings (For your Profile Picture)
+  # 4. Site Settings (For your Profile Picture)
   - name: "settings"
     label: "🛠️ Site Settings"
     files:
