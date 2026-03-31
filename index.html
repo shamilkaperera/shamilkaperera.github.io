@@ -145,53 +145,57 @@
             if(data.profile_pic) document.getElementById('profile-img').src = data.profile_pic;
         }).catch(e => console.log("Using default profile.jpg"));
 
-        // --- 3. MASTER LOADER (WITH BROWSER MEMORY FIX) ---
+        // --- 3. MASTER LOADER (WITH BROWSER MEMORY) ---
         const username = 'shamilkaperera'; 
         const repo = 'shamilkaperera.github.io'; 
 
         async function fetchFolder(folder) {
-            const cacheKey = `backup_${folder}`; // The name for the saved backup
+            const cacheKey = `backup_${folder}`; 
             
             try {
-                // Try to fetch fresh data from GitHub
                 const res = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${folder}?ref=main&t=${Date.now()}`);
-                
-                // If GitHub blocks us (Rate Limit), jump straight to the catch block
                 if (!res.ok) throw new Error('API Blocked'); 
                 
                 let files = await res.json();
                 files = files.filter(f => f.name.endsWith('.md')).reverse();
                 
-                // SUCCESS! Save a backup copy in the user's browser memory
                 localStorage.setItem(cacheKey, JSON.stringify(files));
-                
                 return files;
-                
             } catch (e) { 
-                // BACKUP PLAN: GitHub blocked us, look in the browser memory
                 console.log(`GitHub API blocked. Loading ${folder} from memory...`);
                 const savedBackup = localStorage.getItem(cacheKey);
-                
-                if (savedBackup) {
-                    return JSON.parse(savedBackup); // Return saved data
-                } else {
-                    return []; // No backup exists yet
-                }
+                return savedBackup ? JSON.parse(savedBackup) : [];
             }
         }
 
-        // --- BULLETPROOF EXTRACTOR ---
+        // --- BULLETPROOF EXTRACTOR & SMART DESCRIPTION ---
         async function parseMarkdown(file) {
             const res = await fetch(file.download_url);
             const text = await res.text();
             
-            const title = text.match(/title:\s*["']?(.*?)["']?(?:\n|$)/)?.[1] || file.name.replace('.md', '');
-            let thumb = text.match(/thumbnail:\s*["']?(.*?)["']?(?:\n|$)/)?.[1] || "";
-            const desc = text.match(/description:\s*["']?(.*?)["']?(?:\n|$)/)?.[1] || "";
+            // Clean Title
+            let rawTitle = text.match(/title:\s*(.*)/)?.[1] || file.name.replace('.md', '');
+            const title = rawTitle.replace(/^["']|["']$/g, '').trim();
             
+            // Clean Thumbnail
+            let rawThumb = text.match(/thumbnail:\s*(.*)/)?.[1] || "";
+            let thumb = rawThumb.replace(/^["']|["']$/g, '').trim();
             const fixP = (p) => (p && !p.startsWith('http') && !p.startsWith('/')) ? '/' + p : p;
-            thumb = fixP(thumb.trim());
+            thumb = fixP(thumb);
 
+            // 🌟 SMART DESCRIPTION FIX
+            let rawDesc = text.match(/description:\s*(.*)/)?.[1] || text.match(/summary:\s*(.*)/)?.[1] || "";
+            let desc = rawDesc.replace(/^["']|["']$/g, '').trim();
+            
+            // Auto-Fallback: If description is blank, read the actual article body!
+            if (!desc || desc === "") {
+                let bodyText = text.split('---').pop().trim().replace(/[#*`_\[\]]/g, '').replace(/\n/g, ' ');
+                if (bodyText.length > 5) {
+                    desc = bodyText.substring(0, 120) + "..."; // Grab first 120 letters
+                }
+            }
+
+            // Clean Gallery
             let gallery = [];
             let inGallery = false;
             const lines = text.split('\n');
@@ -233,7 +237,7 @@
                 
                 card.innerHTML = `
                     ${imageHtml}
-                    <div class="p-5 flex-grow flex flex-col">
+                    <div class="p-5 flex-grow flex flex-col text-left">
                         <h3 class="text-xl font-bold mb-2 text-white">${data.title}</h3>
                         <p class="text-gray-400 text-sm ${isBlog ? 'line-clamp-3' : 'line-clamp-2'}">${data.desc}</p>
                     </div>`;
@@ -245,7 +249,7 @@
             }
         }
 
-        // --- NEW: FULL SCREEN IMAGE VIEWER (LIGHTBOX) ---
+        // --- FULL SCREEN IMAGE VIEWER (LIGHTBOX) ---
         window.openImageViewer = function(src) {
             const viewer = document.createElement('div');
             viewer.className = "fixed inset-0 z-[120] bg-black flex items-center justify-center animate-fadeIn cursor-zoom-out";
@@ -261,7 +265,7 @@
             document.body.appendChild(viewer);
         };
 
-        // --- 4. THE COMPACT, MULTI-IMAGE POPUP MODAL ---
+        // --- COMPACT POPUP MODAL ---
         function openProjectModal(title, thumb, desc, fullText, gallery) {
             const modal = document.createElement('div');
             modal.className = "fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/95 overflow-y-auto custom-scrollbar";
@@ -309,7 +313,7 @@
             document.body.appendChild(modal);
         }
 
-        // --- 5. INITIALIZE ---
+        // --- INITIALIZE ---
         async function buildSite() {
             const creatorFiles = await fetchFolder('creator-work');
             const engFiles = await fetchFolder('engineering-work');
