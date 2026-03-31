@@ -145,18 +145,39 @@
             if(data.profile_pic) document.getElementById('profile-img').src = data.profile_pic;
         }).catch(e => console.log("Using default profile.jpg"));
 
-        // --- 3. MASTER LOADER ---
+        // --- 3. MASTER LOADER (WITH BROWSER MEMORY FIX) ---
         const username = 'shamilkaperera'; 
         const repo = 'shamilkaperera.github.io'; 
 
         async function fetchFolder(folder) {
+            const cacheKey = `backup_${folder}`; // The name for the saved backup
+            
             try {
+                // Try to fetch fresh data from GitHub
                 const res = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${folder}?ref=main&t=${Date.now()}`);
-                if (!res.ok) return [];
+                
+                // If GitHub blocks us (Rate Limit), jump straight to the catch block
+                if (!res.ok) throw new Error('API Blocked'); 
+                
                 let files = await res.json();
                 files = files.filter(f => f.name.endsWith('.md')).reverse();
+                
+                // SUCCESS! Save a backup copy in the user's browser memory
+                localStorage.setItem(cacheKey, JSON.stringify(files));
+                
                 return files;
-            } catch (e) { return []; }
+                
+            } catch (e) { 
+                // BACKUP PLAN: GitHub blocked us, look in the browser memory
+                console.log(`GitHub API blocked. Loading ${folder} from memory...`);
+                const savedBackup = localStorage.getItem(cacheKey);
+                
+                if (savedBackup) {
+                    return JSON.parse(savedBackup); // Return saved data
+                } else {
+                    return []; // No backup exists yet
+                }
+            }
         }
 
         // --- BULLETPROOF EXTRACTOR ---
@@ -227,20 +248,16 @@
         // --- NEW: FULL SCREEN IMAGE VIEWER (LIGHTBOX) ---
         window.openImageViewer = function(src) {
             const viewer = document.createElement('div');
-            // Very high z-index to overlay the existing modal
             viewer.className = "fixed inset-0 z-[120] bg-black flex items-center justify-center animate-fadeIn cursor-zoom-out";
             
             viewer.innerHTML = `
                 <button class="absolute top-6 left-6 text-white text-xl md:text-2xl hover:text-emerald-400 z-[130] bg-gray-900/50 hover:bg-gray-900 rounded-full w-12 h-12 flex items-center justify-center backdrop-blur-sm transition border border-gray-700 shadow-xl cursor-pointer" onclick="event.stopPropagation(); this.parentElement.remove()">
                     <i class="fas fa-arrow-left"></i>
                 </button>
-                
                 <img src="${src}" class="max-w-full max-h-full object-contain p-4 md:p-8" onclick="event.stopPropagation();">
             `;
             
-            // Clicking anywhere on the black background also closes it
             viewer.onclick = () => viewer.remove();
-            
             document.body.appendChild(viewer);
         };
 
@@ -253,7 +270,6 @@
             if (thumb) allPics.push(thumb);
             gallery.forEach(img => { if (!allPics.includes(img)) allPics.push(img); });
 
-            // ADDED: cursor-pointer, hover effects, and onclick event to every image!
             const imgClasses = "w-full object-cover rounded-lg border border-gray-700 shadow-md cursor-pointer hover:opacity-80 transition hover:ring-2 hover:ring-emerald-500";
             
             let gridLayout = "";
