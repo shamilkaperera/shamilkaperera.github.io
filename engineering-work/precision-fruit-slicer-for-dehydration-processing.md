@@ -2,7 +2,7 @@
 title: Precision Fruit Slicer for Dehydration Processing
 thumbnail: /images/WhatsApp Image 2026-03-19 at 18.14.04.jpeg
 description: |-
-  As part of a collaborative engineering team, I co-developed a specialized fruit slicing machine designed specifically to streamline the fruit dehydration process. In dehydration, slice uniformity is critical for quality control. Our machine was engineered to deliver consistent, precise cuts to ensure even drying and prevent food waste.
+  As part of a collaborative engineering team, I developed a specialized fruit slicing machine designed specifically to streamline the fruit dehydration process. In dehydration, slice uniformity is critical for quality control. Our machine was engineered to deliver consistent, precise cuts to ensure even drying and prevent food waste.
 
   Key Project Phases:
 
