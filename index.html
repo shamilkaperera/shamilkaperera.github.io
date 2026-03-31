@@ -16,6 +16,7 @@
         .custom-scrollbar::-webkit-scrollbar { width: 8px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: #0B0F19; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #1F2937; border-radius: 10px; }
+        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -70,29 +71,29 @@
 
         <section id="creator" class="tab-content">
             <h2 class="text-3xl font-bold mb-8 border-b border-gray-800 pb-4 text-emerald-400 text-left">Content Creation & 3D</h2>
-            <div id="creator-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <p class="text-gray-500 italic">Loading creative works...</p>
+            <div id="creator-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+                <p class="text-gray-500 italic">Syncing creative works...</p>
             </div>
         </section>
 
         <section id="engineering" class="tab-content">
             <h2 class="text-3xl font-bold mb-8 border-b border-gray-800 pb-4 text-blue-500 text-left">Engineering Projects</h2>
-            <div id="engineering-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <p class="text-gray-500 italic">Loading engineering data...</p>
+            <div id="engineering-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+                <p class="text-gray-500 italic">Syncing engineering data...</p>
             </div>
         </section>
 
         <section id="blog" class="tab-content text-left">
             <h2 class="text-3xl font-bold mb-8 border-b border-gray-800 pb-4 text-gray-400">Insights & Articles</h2>
             <div id="blog-list" class="space-y-6 max-w-3xl">
-                <p class="text-gray-500 italic">No articles published yet.</p>
+                <p class="text-gray-500 italic">Writing desk is empty.</p>
             </div>
         </section>
 
         <section id="contact" class="tab-content">
             <div class="max-w-2xl mx-auto bg-gray-900 p-8 rounded-3xl border border-gray-800 shadow-xl mt-10">
                 <h2 class="text-3xl font-bold mb-6 text-center text-white">Let's Collaborate</h2>
-                <form onsubmit="event.preventDefault(); alert('Message sent!');">
+                <form onsubmit="event.preventDefault(); alert('Message logged!');">
                     <div class="mb-4"><input type="text" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500" placeholder="Your Name"></div>
                     <div class="mb-4"><input type="email" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500" placeholder="Email Address"></div>
                     <div class="mb-6"><textarea class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500 h-32" placeholder="Tell me about your project..."></textarea></div>
@@ -111,43 +112,39 @@
             if(btn) btn.classList.add(tabId === 'creator' ? 'text-emerald-400' : 'text-blue-400');
         }
 
-        // DP LOADER
         fetch('settings.json').then(res => res.json()).then(data => {
             if(data.profile_pic) document.getElementById('profile-img').src = data.profile_pic;
-        }).catch(e => console.log("Default profile.jpg used"));
+        }).catch(e => console.log("Default DP"));
 
-        // SMART PROJECT LOADER
+        // CACHE-BUSTING PROJECT LOADER
         async function loadProjects(folder, gridId) {
             const username = 'shamilkaperera'; 
             const repo = 'shamilkaperera.github.io'; 
             const grid = document.getElementById(gridId);
 
             try {
-                const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${folder}`);
-                if (!response.ok) throw new Error('Folder not found');
+                const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${folder}?t=${Date.now()}`);
+                if (!response.ok) throw new Error('API Error');
                 const files = await response.json();
 
                 if (files && files.length > 0) {
                     grid.innerHTML = ''; 
-                    for (const file of files) {
+                    files.reverse().forEach(async (file) => {
                         if (file.name.endsWith('.md')) {
                             const contentRes = await fetch(file.download_url);
                             const text = await contentRes.text();
                             
-                            // Robust Data Extraction
                             const title = text.match(/title:\s*"(.*?)"/)?.[1] || text.match(/title:\s*(.*)/)?.[1] || file.name.replace('.md', '');
                             let thumb = text.match(/thumbnail:\s*"(.*?)"/)?.[1] || text.match(/thumbnail:\s*(.*)/)?.[1] || "";
                             const desc = text.match(/description:\s*"(.*?)"/)?.[1] || text.match(/description:\s*(.*)/)?.[1] || "";
                             
-                            // Image path fix
-                            const fixPath = (p) => (p && !p.startsWith('http') && !p.startsWith('/')) ? '/' + p : p;
-                            thumb = fixPath(thumb);
+                            const fixP = (p) => (p && !p.startsWith('http') && !p.startsWith('/')) ? '/' + p : p;
+                            thumb = fixP(thumb);
 
-                            // Extract Gallery
                             const galleryRegex = /image:\s*"(.*?)"/g;
                             let gallery = [];
                             let m;
-                            while ((m = galleryRegex.exec(text)) !== null) gallery.push(fixPath(m[1]));
+                            while ((m = galleryRegex.exec(text)) !== null) gallery.push(fixP(m[1]));
 
                             const card = document.createElement('div');
                             card.className = "bg-gray-800/40 rounded-2xl overflow-hidden hover:shadow-2xl transition transform hover:-translate-y-2 border border-gray-800 cursor-pointer";
@@ -158,12 +155,12 @@
                             card.onclick = () => openProjectModal(title, thumb, desc, text, gallery);
                             grid.appendChild(card);
                         }
-                    }
-                } else { grid.innerHTML = '<p class="text-gray-600 italic">No projects found.</p>'; }
-            } catch (e) { grid.innerHTML = '<p class="text-gray-600 italic">Project folder is empty.</p>'; }
+                    });
+                } else { grid.innerHTML = '<p class="text-gray-500 italic">This folder is empty.</p>'; }
+            } catch (e) { grid.innerHTML = '<p class="text-gray-500 italic">Connect your CMS to begin.</p>'; }
         }
 
-        // FACEBOOK STYLE MODAL
+        // FULL FACEBOOK-STYLE MOSAIC MODAL
         function openProjectModal(title, thumb, desc, fullText, gallery) {
             const modal = document.createElement('div');
             modal.className = "fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/95 overflow-y-auto custom-scrollbar";
@@ -173,12 +170,14 @@
             
             if (allPics.length === 1) {
                 gridLayout = `<img src="${allPics[0]}" class="w-full rounded-xl border border-gray-700">`;
+            } else if (allPics.length === 2) {
+                gridLayout = `<div class="grid grid-cols-2 gap-2">${allPics.map(img => `<img src="${img}" class="w-full h-64 md:h-80 object-cover rounded-xl border border-gray-700">`).join('')}</div>`;
             } else {
                 gridLayout = `
                     <div class="flex flex-col gap-2">
-                        <img src="${allPics[0]}" class="w-full h-80 object-cover rounded-t-xl border border-gray-700">
+                        <img src="${allPics[0]}" class="w-full h-80 md:h-[450px] object-cover rounded-t-xl border border-gray-700">
                         <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
-                            ${allPics.slice(1).map(img => `<img src="${img}" class="w-full h-32 md:h-44 object-cover rounded-lg border border-gray-700">`).join('')}
+                            ${allPics.slice(1).map(img => `<img src="${img}" class="w-full h-32 md:h-48 object-cover rounded-lg border border-gray-700">`).join('')}
                         </div>
                     </div>`;
             }
@@ -187,10 +186,12 @@
                 <div class="bg-gray-950 border border-gray-800 max-w-4xl w-full rounded-2xl relative shadow-2xl my-8 text-left">
                     <button class="fixed top-6 right-6 text-white text-3xl hover:text-red-500 z-[110] bg-gray-900 rounded-full w-12 h-12 flex items-center justify-center border border-gray-700" onclick="this.parentElement.parentElement.remove()">×</button>
                     <div class="p-6 md:p-8 h-full max-h-[85vh] overflow-y-auto custom-scrollbar">
-                        <div class="mb-6"><h2 class="text-3xl font-bold text-white mb-2">${title}</h2><p class="text-emerald-400 font-medium border-l-4 border-emerald-500 pl-4">${desc}</p></div>
-                        <div class="mb-8">${gridLayout}</div>
+                        <div class="mb-6"><h2 class="text-3xl font-bold text-white mb-2 leading-tight">${title}</h2><p class="text-emerald-400 font-medium border-l-4 border-emerald-500 pl-4">${desc}</p></div>
+                        <div class="mb-10">${gridLayout}</div>
                         <div class="mt-8 pt-8 border-t border-gray-800 text-gray-300 text-base leading-relaxed">
-                            ${fullText.split('---').pop().trim().replace(/\n/g, '<br>')}
+                            <div class="bg-gray-900/40 p-6 rounded-xl border border-gray-800/50">
+                                ${fullText.split('---').pop().trim().replace(/\n/g, '<br>')}
+                            </div>
                         </div>
                     </div>
                 </div>
