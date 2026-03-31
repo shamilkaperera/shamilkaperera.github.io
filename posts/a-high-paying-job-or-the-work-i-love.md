@@ -4,7 +4,7 @@ thumbnail: /images/Screenshot 2026-03-31 152050.png
 date: 2026-03-31T14:56:00
 ---
 
-**Does It Matter: A High-Paying Job or the Work I Love?**
+# Does It Matter: A High-Paying Job or the Work I Love?
 
 There is a particular kind of question that does not leave you easily. It follows you into quiet moments, sits beside you during late-night study sessions, and lingers in the background of even your most productive days. I have been living with such a question for some time now.
 
@@ -12,9 +12,7 @@ As a Mechanical Engineering student at the University of Peradeniya, I am walkin
 
 This is where the internal conflict begins, not as a simple choice, but as a psychological tension between two powerful drives: security and meaning.
 
-***
-
-### The Psychology Behind This Conflict
+## The Psychology Behind This Conflict
 
 What I am experiencing is not unique. In fact, it is deeply rooted in human psychology.
 
@@ -32,9 +30,7 @@ This explains why choosing only one side often feels incomplete.
 
 ![](/images/Screenshot%202026-03-31%20152106.png)
 
-***
-
-### The False Choice Society Presents
+## The False Choice Society Presents
 
 Society tends to frame this dilemma as a strict decision. Either you pursue a high-paying career and sacrifice passion, or you follow your passion and accept financial instability.
 
@@ -42,9 +38,7 @@ But this is a simplified narrative. Real life is rarely built on extremes.
 
 Through reflection, I have come to understand that this is not a decision between two opposing paths. It is a question of timing, strategy, and perspective.
 
-***
-
-### My Personal Resolution
+## My Personal Resolution
 
 I have made a decision, but not in the way most people expect.
 
@@ -56,28 +50,19 @@ Instead, I am redefining its role in my life.
 
 After graduation, I plan to work in the engineering field. This is not a compromise, but a deliberate step. It allows me to begin my earning cycle, gain professional discipline, and build financial stability. These are not obstacles to my passion; they are resources that will support it.
 
-***
+![](/images/Screenshot%202026-03-31%20152115.png)
 
-### A Strategic Approach to Passion
+## A Strategic Approach to Passion
 
 Research in behavioral psychology often highlights the importance of reducing pressure when developing complex skills. When creative work becomes the sole source of income too early, it can lead to stress, burnout, and reduced quality.
 
 By maintaining a stable income, I remove that pressure.
 
-This gives me the freedom to:
-
-- Experiment without fear of failure
-- Develop high-quality content over time
-- Invest in tools and learning
-- Build an authentic creative identity
+This gives me the freedom to experiment without fear of failure, develop high-quality content over time, invest in tools and learning, and build an authentic creative identity.
 
 In this way, my engineering career becomes the foundation, while content creation becomes the structure I gradually build upon it.
 
-![](/images/Screenshot%202026-03-31%20152115.png)
-
-***
-
-### Redefining Success
+## Redefining Success
 
 The more I reflect, the more I realize that success is not about choosing one path over another. It is about aligning different phases of life with different goals.
 
@@ -85,9 +70,7 @@ Right now, my goal is to build stability and begin earning. At the same time, I 
 
 Eventually, there will come a point where my passion grows strong enough to stand independently. When that moment arrives, the transition will not be uncertain. It will be prepared.
 
-***
-
-### Final Reflection
+## **Final Reflection**
 
 So, does it matter whether I choose a high-paying job or the work I love?
 
