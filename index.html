@@ -158,7 +158,6 @@
                 
                 let files = await res.json();
                 
-                // Keep only .md files (Removed the simple .reverse() here so we can do a real Date sort later)
                 files = files.filter(f => f.name.endsWith('.md'));
                 
                 localStorage.setItem(cacheKey, JSON.stringify(files));
@@ -175,21 +174,17 @@
             const res = await fetch(file.download_url);
             const text = await res.text();
             
-            // Clean Title
             let rawTitle = text.match(/title:\s*(.*)/)?.[1] || file.name.replace('.md', '');
             const title = rawTitle.replace(/^["']|["']$/g, '').trim();
             
-            // Extract Date for chronologic sorting
             let rawDate = text.match(/date:\s*(.*)/)?.[1] || "";
             const date = rawDate.replace(/^["']|["']$/g, '').trim();
 
-            // Clean Thumbnail
             let rawThumb = text.match(/thumbnail:\s*(.*)/)?.[1] || "";
             let thumb = rawThumb.replace(/^["']|["']$/g, '').trim();
             const fixP = (p) => (p && !p.startsWith('http') && !p.startsWith('/')) ? '/' + p : p;
             thumb = fixP(thumb);
 
-            // SMART DESCRIPTION
             let rawDesc = text.match(/description:\s*(.*)/)?.[1] || text.match(/summary:\s*(.*)/)?.[1] || "";
             let desc = rawDesc.replace(/^["']|["']$/g, '').trim();
             
@@ -200,7 +195,6 @@
                 }
             }
 
-            // Clean Gallery
             let gallery = [];
             let inGallery = false;
             const lines = text.split('\n');
@@ -233,20 +227,17 @@
                 return;
             }
 
-            // Step 1: Parse all files first so we can read their dates
             let parsedFiles = [];
             for (let file of files) {
                 parsedFiles.push(await parseMarkdown(file));
             }
 
-            // Step 2: TRUE CHRONOLOGICAL SORTING (Newest to Oldest based on CMS Date)
             parsedFiles.sort((a, b) => {
-                let dateA = new Date(a.date || 0).getTime(); // If no date, treat as very old
+                let dateA = new Date(a.date || 0).getTime();
                 let dateB = new Date(b.date || 0).getTime();
                 return dateB - dateA;
             });
 
-            // Step 3: Draw the cards
             for (let i = 0; i < parsedFiles.length; i++) {
                 const data = parsedFiles[i];
                 
@@ -262,7 +253,8 @@
                         <p class="text-gray-400 text-sm ${isBlog ? 'line-clamp-3' : 'line-clamp-2'}">${data.desc}</p>
                     </div>`;
                 
-                card.onclick = () => openProjectModal(data.title, data.thumb, data.desc, data.text, data.gallery);
+                // Pass the 'isBlog' parameter down!
+                card.onclick = () => openProjectModal(data.title, data.thumb, data.desc, data.text, data.gallery, isBlog);
 
                 fullGrid.appendChild(card.cloneNode(true)).onclick = card.onclick;
                 if (i < 3) homeGrid.appendChild(card);
@@ -285,8 +277,8 @@
             document.body.appendChild(viewer);
         };
 
-        // --- COMPACT POPUP MODAL ---
-        function openProjectModal(title, thumb, desc, fullText, gallery) {
+        // --- COMPACT POPUP MODAL (WITH BLOG/MAGAZINE ENGINE) ---
+        function openProjectModal(title, thumb, desc, fullText, gallery, isBlog = false) {
             const modal = document.createElement('div');
             modal.className = "fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/95 overflow-y-auto custom-scrollbar";
             
@@ -296,44 +288,134 @@
 
             const imgClasses = "w-full object-cover rounded-lg border border-gray-700 shadow-md cursor-pointer hover:opacity-80 transition hover:ring-2 hover:ring-emerald-500";
             
-            let gridLayout = "";
-            if (allPics.length === 1) {
-                gridLayout = `<img src="${allPics[0]}" class="w-full rounded-xl border border-gray-700 shadow-lg cursor-pointer hover:opacity-80 transition hover:ring-2 hover:ring-emerald-500" onclick="openImageViewer(this.src)">`;
-            } else if (allPics.length > 1) {
-                gridLayout = `
-                    <div class="flex flex-col gap-2">
-                        <img src="${allPics[0]}" class="${imgClasses} h-56 md:h-72" onclick="openImageViewer(this.src)">
-                        <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
-                            ${allPics.slice(1).map(img => `<img src="${img}" class="${imgClasses} h-24 md:h-32" onclick="openImageViewer(this.src)">`).join('')}
+            let contentHtml = "";
+
+            if (isBlog) {
+                // --- BLOG / MAGAZINE LAYOUT ---
+                let rawBody = fullText.split('---').pop().trim();
+                let paragraphs = rawBody.split(/\n\n+/); // Split by paragraph breaks
+                
+                let articleHtml = "";
+                let imgIndex = 0;
+                
+                // Calculate even spacing for images among paragraphs
+                let interval = Math.max(1, Math.floor(paragraphs.length / (allPics.length + 1)));
+
+                for (let i = 0; i < paragraphs.length; i++) {
+                    articleHtml += `<p class="mb-6">${paragraphs[i].replace(/\n/g, '<br>')}</p>`;
+                    
+                    // Insert an image evenly between text chunks
+                    if ((i + 1) % interval === 0 && imgIndex < allPics.length) {
+                        articleHtml += `<img src="${allPics[imgIndex]}" class="w-full h-auto max-h-[500px] object-cover rounded-2xl my-10 border border-gray-700 shadow-2xl cursor-pointer hover:opacity-80 transition" onclick="openImageViewer(this.src)">`;
+                        imgIndex++;
+                    }
+                }
+                
+                // Drop remaining images at the end of the post
+                while(imgIndex < allPics.length) {
+                     articleHtml += `<img src="${allPics[imgIndex]}" class="w-full h-auto max-h-[500px] object-cover rounded-2xl my-10 border border-gray-700 shadow-2xl cursor-pointer hover:opacity-80 transition" onclick="openImageViewer(this.src)">`;
+                     imgIndex++;
+                }
+
+                contentHtml = `
+                    <div class="mb-8 pr-8 text-left border-b border-gray-800 pb-6">
+                        <h2 class="text-3xl md:text-5xl font-black text-white mb-4 leading-tight">${title}</h2>
+                        ${desc ? `<p class="text-emerald-400 font-medium text-lg border-l-4 border-emerald-500 pl-4">${desc}</p>` : ''}
+                    </div>
+                    
+                    <div class="mt-6 text-gray-300 text-lg md:text-xl leading-relaxed font-light text-left">
+                        ${articleHtml}
+                    </div>
+                    
+                    <div class="mt-16 pt-8 border-t border-gray-800">
+                        <h3 class="text-2xl font-bold text-white mb-4">Join the Discussion</h3>
+                        <p class="text-gray-500 text-sm mb-6">You can comment anonymously by checking the "I'd rather post as a guest" box.</p>
+                        <div id="disqus_thread" class="bg-gray-100 p-6 rounded-2xl"></div>
+                    </div>
+                `;
+
+            } else {
+                // --- STANDARD CREATOR/ENGINEERING LAYOUT ---
+                let gridLayout = "";
+                if (allPics.length === 1) {
+                    gridLayout = `<img src="${allPics[0]}" class="${imgClasses} rounded-xl shadow-lg" onclick="openImageViewer(this.src)">`;
+                } else if (allPics.length > 1) {
+                    gridLayout = `
+                        <div class="flex flex-col gap-2">
+                            <img src="${allPics[0]}" class="${imgClasses} h-56 md:h-72" onclick="openImageViewer(this.src)">
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+                                ${allPics.slice(1).map(img => `<img src="${img}" class="${imgClasses} h-24 md:h-32" onclick="openImageViewer(this.src)">`).join('')}
+                            </div>
+                        </div>`;
+                }
+
+                contentHtml = `
+                    <div class="mb-5 pr-8 text-left">
+                        <h2 class="text-2xl md:text-3xl font-bold text-white mb-2 leading-tight uppercase tracking-tight">${title}</h2>
+                        ${desc ? `<p class="text-emerald-400 font-medium border-l-4 border-emerald-500 pl-4 text-sm">${desc}</p>` : ''}
+                    </div>
+                    <div class="mb-8">${gridLayout}</div>
+                    <div class="mt-6 pt-6 border-t border-gray-800 text-gray-300 text-sm leading-relaxed font-light text-left">
+                        <div class="bg-gray-900/40 p-5 rounded-xl border border-gray-800/50">
+                            ${fullText.split('---').pop().trim().replace(/\n/g, '<br>')}
                         </div>
-                    </div>`;
+                    </div>
+                `;
             }
 
+            let modalWidth = isBlog ? 'max-w-4xl' : 'max-w-3xl';
+
             modal.innerHTML = `
-                <div class="bg-gray-950 border border-gray-800 max-w-3xl w-full rounded-2xl relative shadow-2xl my-8 text-left overflow-hidden">
+                <div class="bg-gray-950 border border-gray-800 ${modalWidth} w-full rounded-2xl relative shadow-2xl my-8 text-left overflow-hidden">
                     <button class="absolute top-4 right-4 text-white text-3xl hover:text-red-500 z-[110] bg-gray-900 rounded-full w-10 h-10 flex items-center justify-center border border-gray-700 shadow-xl" onclick="this.parentElement.parentElement.remove()">×</button>
                     
-                    <div class="p-6 md:p-8 h-full max-h-[85vh] overflow-y-auto custom-scrollbar">
-                        
-                        <div class="mb-5 pr-8 text-left">
-                            <h2 class="text-2xl md:text-3xl font-bold text-white mb-2 leading-tight uppercase tracking-tight">${title}</h2>
-                            ${desc ? `<p class="text-emerald-400 font-medium border-l-4 border-emerald-500 pl-4 text-sm">${desc}</p>` : ''}
-                        </div>
-                        
-                        <div class="mb-8">${gridLayout}</div>
-                        
-                        <div class="mt-6 pt-6 border-t border-gray-800 text-gray-300 text-sm leading-relaxed font-light text-left">
-                            <div class="bg-gray-900/40 p-5 rounded-xl border border-gray-800/50">
-                                ${fullText.split('---').pop().trim().replace(/\n/g, '<br>')}
-                            </div>
-                        </div>
+                    <div class="p-6 md:p-10 h-full max-h-[85vh] overflow-y-auto custom-scrollbar">
+                        ${contentHtml}
                     </div>
                 </div>
             `;
             document.body.appendChild(modal);
+
+            // Load Comments ONLY for blogs
+            if (isBlog) {
+                initDisqus(title);
+            }
         }
 
-        // --- INITIALIZE ---
+        // --- DISQUS INITIALIZATION ---
+        function initDisqus(pageTitle) {
+            // ==========================================
+            // CHANGE THIS TO YOUR ACTUAL DISQUS SHORTNAME!
+            // ==========================================
+            const disqus_shortname = 'YOUR-SHORTNAME-HERE'; 
+            
+            if (window.DISQUS) {
+                // If DISQUS is already loaded, reset it for the new article
+                DISQUS.reset({
+                    reload: true,
+                    config: function () {  
+                        this.page.identifier = pageTitle;  
+                        this.page.url = window.location.href.split('#')[0] + "#" + pageTitle.replace(/[^a-zA-Z0-9]/g, '-');
+                        this.page.title = pageTitle;
+                    }
+                });
+            } else {
+                // First time loading DISQUS
+                window.disqus_config = function () {
+                    this.page.identifier = pageTitle;
+                    this.page.url = window.location.href.split('#')[0] + "#" + pageTitle.replace(/[^a-zA-Z0-9]/g, '-');
+                    this.page.title = pageTitle;
+                };
+                (function() {
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            }
+        }
+
+        // --- INITIALIZE SITE ---
         async function buildSite() {
             const creatorFiles = await fetchFolder('creator-work');
             const engFiles = await fetchFolder('engineering-work');
@@ -341,6 +423,7 @@
 
             await renderCards(creatorFiles, 'home-creator-grid', 'full-creator-grid');
             await renderCards(engFiles, 'home-engineering-grid', 'full-engineering-grid');
+            // Pass true for Blog layout
             await renderCards(blogFiles, 'home-blog-grid', 'full-blog-grid', true);
         }
 
