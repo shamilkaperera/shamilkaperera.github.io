@@ -9,41 +9,29 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
         
-        /* Base Styles */
+        /* Base Styles with Scrolling Background Image */
         body { 
             font-family: 'Inter', sans-serif; 
-            background-color: #0B0F19; 
+            background-color: #0B0F19; /* Fallback dark color */
             color: #ffffff; 
             overflow-x: hidden; 
-            position: relative;
-        }
-        
-        /* The 3D Background Canvas Layer */
-        #vanta-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1; 
-            pointer-events: none; 
-        }
-        
-        /* Content Wrapper to sit above the 3D background */
-        .content-wrapper {
-            position: relative;
-            z-index: 10;
+            
+            /* Background Image Properties */
+            background-size: cover;
+            background-position: top center;
+            background-attachment: scroll; /* Makes the image scroll naturally with the page */
+            transition: background-image 0.5s ease-in-out;
         }
 
         /* Glass Navigation */
         .glass-nav { 
-            background: rgba(11, 15, 25, 0.6); 
+            background: rgba(11, 15, 25, 0.7); 
             backdrop-filter: blur(16px); 
             -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* Glass Cards (Lets the 3D show through slightly) */
+        /* Glass Cards */
         .glass-card {
             background: rgba(17, 24, 39, 0.7);
             backdrop-filter: blur(10px);
@@ -65,8 +53,6 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
-    <div id="vanta-canvas"></div>
-
     <nav class="glass-nav sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
@@ -87,7 +73,7 @@
         </div>
     </nav>
 
-    <main class="content-wrapper flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
+    <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
 
         <section id="home" class="tab-content active">
             <div class="flex flex-col md:flex-row items-center justify-between mt-10 mb-24">
@@ -175,82 +161,20 @@
         </section>
     </main>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.topology.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.dots.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
-
     <script>
-        // --- 0. 3D BACKGROUND ENGINE ---
-        let currentVantaEffect = null;
+        // --- 0. THEME BACKGROUND ENGINE ---
+        const themeBackgrounds = {
+            'home': 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2000&q=80', // Tech/Circuit
+            'creator': 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=2000&q=80', // Camera Lens
+            'engineering': 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=2000&q=80', // Machined Gears
+            'blog': 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=2000&q=80', // Abstract Mind/Data
+            'contact': 'https://images.unsplash.com/photo-1528301721190-186c3bd85418?auto=format&fit=crop&w=2000&q=80' // Global Network
+        };
 
         function setBackground(tabId) {
-            if (currentVantaEffect) {
-                currentVantaEffect.destroy();
-                currentVantaEffect = null;
-            }
-
-            const canvasConfig = {
-                el: "#vanta-canvas",
-                mouseControls: true,
-                touchControls: true,
-                gyroControls: false,
-                minHeight: 200.00,
-                minWidth: 200.00,
-                scale: 1.00,
-                scaleMobile: 1.00
-            };
-
-            try {
-                if (tabId === 'home') {
-                    currentVantaEffect = VANTA.NET({
-                        ...canvasConfig,
-                        color: 0x3b82f6,
-                        backgroundColor: 0x0B0F19,
-                        points: 12.00,
-                        maxDistance: 22.00,
-                        spacing: 18.00
-                    });
-                } else if (tabId === 'engineering') {
-                    currentVantaEffect = VANTA.TOPOLOGY({
-                        ...canvasConfig,
-                        color: 0x10b981,
-                        backgroundColor: 0x0B0F19
-                    });
-                } else if (tabId === 'creator') {
-                    currentVantaEffect = VANTA.FOG({
-                        ...canvasConfig,
-                        highlightColor: 0x3b82f6,
-                        midtoneColor: 0x0B0F19,
-                        lowlightColor: 0x10b981,
-                        baseColor: 0x0B0F19,
-                        blurFactor: 0.60,
-                        zoom: 1.50
-                    });
-                } else if (tabId === 'blog') {
-                    currentVantaEffect = VANTA.DOTS({
-                        ...canvasConfig,
-                        color: 0x4b5563,
-                        color2: 0x3b82f6,
-                        backgroundColor: 0x0B0F19,
-                        size: 3.00,
-                        spacing: 35.00
-                    });
-                } else if (tabId === 'contact') {
-                    currentVantaEffect = VANTA.GLOBE({
-                        ...canvasConfig,
-                        color: 0x10b981,
-                        color2: 0x3b82f6,
-                        size: 1.10,
-                        backgroundColor: 0x0B0F19
-                    });
-                }
-            } catch (error) {
-                console.log("3D Background disabled", error);
-                document.getElementById('vanta-canvas').style.backgroundColor = "#0B0F19";
-            }
+            const imageUrl = themeBackgrounds[tabId];
+            // Uses a linear-gradient to create a heavy dark overlay (92% opacity) directly over the image
+            document.body.style.backgroundImage = `linear-gradient(rgba(11, 15, 25, 0.92), rgba(11, 15, 25, 0.92)), url('${imageUrl}')`;
         }
 
         // --- 1. TAB LOGIC ---
@@ -268,11 +192,11 @@
                 else btn.classList.add('text-gray-300');
             }
 
-            setBackground(tabId); // Trigger 3D background change
+            setBackground(tabId); // Swap background image
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            setBackground('home');
+            setBackground('home'); // Load initial background
         });
 
         // --- 2. DP SETTINGS ---
@@ -409,7 +333,7 @@
             document.body.appendChild(viewer);
         };
 
-        // --- COMPACT POPUP MODAL (CLEAN BLOG UPDATE) ---
+        // --- COMPACT POPUP MODAL ---
         function openProjectModal(title, thumb, desc, fullText, gallery, isBlog = false) {
             const modal = document.createElement('div');
             modal.className = "fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm overflow-y-auto custom-scrollbar";
@@ -423,10 +347,9 @@
             let contentHtml = "";
 
             if (isBlog) {
-                // --- PURE, CLEAN BLOG LAYOUT (NO GRID!) ---
+                // --- PURE, CLEAN BLOG LAYOUT (NO GRID) ---
                 let rawBody = fullText.split('---').pop().trim();
                 
-                // If you use the CMS to insert Markdown images like ![alt](src), this makes them look beautiful
                 let formattedBody = rawBody
                     .replace(/!\[.*?\]\((.*?)\)/g, '<img src="$1" class="w-full h-auto max-h-[500px] object-cover rounded-2xl my-10 border border-gray-700 shadow-2xl cursor-pointer hover:opacity-90 transition hover:ring-2 hover:ring-blue-500" onclick="openImageViewer(this.src)">')
                     .replace(/\n/g, '<br>');
