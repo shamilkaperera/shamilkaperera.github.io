@@ -146,7 +146,7 @@
             if(data.profile_pic) document.getElementById('profile-img').src = data.profile_pic;
         }).catch(e => console.log("Using default profile.jpg"));
 
-        // --- 3. MASTER LOADER (Fetches & Sorts) ---
+        // --- 3. MASTER LOADER ---
         const username = 'shamilkaperera'; 
         const repo = 'shamilkaperera.github.io'; 
 
@@ -156,17 +156,17 @@
                 if (!res.ok) return [];
                 let files = await res.json();
                 
-                // Keep only .md files, and REVERSE them so newest is always first
+                // Only keep .md files and reverse them (Newest top)
                 files = files.filter(f => f.name.endsWith('.md')).reverse();
                 return files;
             } catch (e) { return []; }
         }
 
+        // --- THE BULLETPROOF EXTRACTOR FIX ---
         async function parseMarkdown(file) {
             const res = await fetch(file.download_url);
             const text = await res.text();
             
-            // Extract text data
             const title = text.match(/title:\s*["']?(.*?)["']?(?:\n|$)/)?.[1] || file.name.replace('.md', '');
             let thumb = text.match(/thumbnail:\s*["']?(.*?)["']?(?:\n|$)/)?.[1] || "";
             const desc = text.match(/description:\s*["']?(.*?)["']?(?:\n|$)/)?.[1] || "";
@@ -174,12 +174,34 @@
             const fixP = (p) => (p && !p.startsWith('http') && !p.startsWith('/')) ? '/' + p : p;
             thumb = fixP(thumb.trim());
 
-            // THE FIX: Super robust Regex to find images with OR without quotes in the CMS list
-            const galleryRegex = /image:\s*["']?([^"'\n\r]+)["']?/g;
+            // NEW: Bulletproof Gallery Scanner
             let gallery = [];
-            let m;
-            while ((m = galleryRegex.exec(text)) !== null) {
-                gallery.push(fixP(m[1].trim()));
+            let inGallery = false;
+            const lines = text.split('\n');
+            
+            for (let line of lines) {
+                // If we hit the end of the config block, stop looking
+                if (line.trim() === '---' && inGallery) break; 
+                
+                // Start looking when we see 'gallery:'
+                if (line.trim().startsWith('gallery:')) {
+                    inGallery = true;
+                    continue;
+                }
+                
+                if (inGallery) {
+                    // If the line starts with a letter (no dash), we've moved to a new section, stop looking
+                    if (line.match(/^[a-zA-Z0-9_]+:/)) {
+                        inGallery = false;
+                        continue;
+                    }
+                    // If it's a list item (starts with a dash)
+                    if (line.trim().startsWith('-')) {
+                        // Strip out the dash, the word 'image:', and any quotes to reveal just the raw path
+                        let cleanPath = line.replace('-', '').replace('image:', '').replace(/["']/g, '').trim();
+                        if (cleanPath) gallery.push(fixP(cleanPath));
+                    }
+                }
             }
 
             return { title, thumb, desc, text, gallery };
@@ -214,10 +236,8 @@
                 
                 card.onclick = () => openProjectModal(data.title, data.thumb, data.desc, data.text, data.gallery);
 
-                // Add to Full Tab
                 fullGrid.appendChild(card.cloneNode(true)).onclick = card.onclick;
                 
-                // Add to Home Preview (Only the first 3!)
                 if (i < 3) {
                     homeGrid.appendChild(card);
                 }
@@ -239,7 +259,6 @@
             if (allPics.length === 1) {
                 gridLayout = `<img src="${allPics[0]}" class="w-full rounded-xl border border-gray-700 shadow-lg">`;
             } else {
-                // Large hero image, smaller grid below
                 gridLayout = `
                     <div class="flex flex-col gap-2">
                         <img src="${allPics[0]}" class="w-full h-56 md:h-72 object-cover rounded-xl border border-gray-700 shadow-lg">
@@ -273,14 +292,12 @@
             document.body.appendChild(modal);
         }
 
-        // --- 5. INITIALIZE EVERYTHING ---
+        // --- 5. INITIALIZE ---
         async function buildSite() {
-            // Fetch all 3 folders from GitHub
             const creatorFiles = await fetchFolder('creator-work');
             const engFiles = await fetchFolder('engineering-work');
             const blogFiles = await fetchFolder('posts');
 
-            // Render the cards to the Home section and the Full Tabs simultaneously
             await renderCards(creatorFiles, 'home-creator-grid', 'full-creator-grid');
             await renderCards(engFiles, 'home-engineering-grid', 'full-engineering-grid');
             await renderCards(blogFiles, 'home-blog-grid', 'full-blog-grid', true);
