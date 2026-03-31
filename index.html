@@ -5,42 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mech x Creative | Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
         
+        /* Base Styles with Scrolling Background Image */
         body { 
             font-family: 'Inter', sans-serif; 
-            background-color: #0B0F19; 
+            background-color: #0B0F19; /* Fallback dark color */
             color: #ffffff; 
             overflow-x: hidden; 
+            
+            /* Background Image Properties */
             background-size: cover;
             background-position: top center;
-            background-attachment: scroll; /* Makes background scroll with page */
-            transition: background-image 0.8s ease-in-out;
+            background-attachment: scroll; /* Makes the image scroll naturally with the page */
+            transition: background-image 0.5s ease-in-out;
         }
 
+        /* Glass Navigation */
         .glass-nav { 
-            background: rgba(11, 15, 25, 0.8); 
+            background: rgba(11, 15, 25, 0.7); 
             backdrop-filter: blur(16px); 
             -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
+        /* Glass Cards */
         .glass-card {
             background: rgba(17, 24, 39, 0.7);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
-
-        /* MARKDOWN STYLING FOR BLOGS */
-        .markdown-content h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1.5rem; color: #fff; }
-        .markdown-content h2 { font-size: 1.8rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; color: #fff; }
-        .markdown-content h3 { font-size: 1.4rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #3b82f6; }
-        .markdown-content p { margin-bottom: 1.25rem; line-height: 1.8; color: #d1d5db; }
-        .markdown-content strong { color: #10b981; font-weight: 700; }
-        .markdown-content ul { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1.5rem; }
 
         .tab-content { display: none; animation: fadeIn 0.4s ease-in-out; }
         .tab-content.active { display: block; }
@@ -76,7 +73,7 @@
         </div>
     </nav>
 
-    <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full relative z-10">
+    <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
 
         <section id="home" class="tab-content active">
             <div class="flex flex-col md:flex-row items-center justify-between mt-10 mb-24">
@@ -132,48 +129,52 @@
         </section>
 
         <section id="creator" class="tab-content">
-            <h2 class="text-4xl font-black mb-8 border-b border-gray-800/50 pb-4 text-emerald-400 text-left">Content Creation & 3D</h2>
+            <h2 class="text-4xl font-black mb-8 border-b border-gray-800/50 pb-4 text-emerald-400 text-left drop-shadow-lg tracking-tight">Content Creation & 3D</h2>
             <div id="full-creator-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left"></div>
         </section>
 
         <section id="engineering" class="tab-content">
-            <h2 class="text-4xl font-black mb-8 border-b border-gray-800/50 pb-4 text-blue-500 text-left">Engineering Projects</h2>
+            <h2 class="text-4xl font-black mb-8 border-b border-gray-800/50 pb-4 text-blue-500 text-left drop-shadow-lg tracking-tight">Engineering Projects</h2>
             <div id="full-engineering-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left"></div>
         </section>
 
         <section id="blog" class="tab-content text-left">
-            <h2 class="text-4xl font-black mb-8 border-b border-gray-800/50 pb-4 text-gray-200">Insights & Articles</h2>
+            <h2 class="text-4xl font-black mb-8 border-b border-gray-800/50 pb-4 text-gray-200 drop-shadow-lg tracking-tight">Insights & Articles</h2>
             <div id="full-blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left"></div>
         </section>
 
         <section id="contact" class="tab-content">
-            <div class="max-w-2xl mx-auto glass-card p-8 md:p-12 rounded-3xl shadow-2xl mt-10 text-left">
-                <h2 class="text-4xl font-black mb-2 text-center text-white">Let's Collaborate</h2>
+            <div class="max-w-2xl mx-auto glass-card p-8 md:p-12 rounded-3xl shadow-2xl mt-10 text-left relative overflow-hidden">
+                <div class="absolute -top-24 -right-24 w-48 h-48 bg-blue-600 rounded-full blur-[80px] opacity-30 pointer-events-none"></div>
+                <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-emerald-600 rounded-full blur-[80px] opacity-30 pointer-events-none"></div>
+                
+                <h2 class="text-4xl font-black mb-2 text-center text-white tracking-tight">Let's Collaborate</h2>
                 <p class="text-center text-gray-400 mb-8 font-light">Have an engineering problem or a creative vision? Reach out.</p>
-                <form onsubmit="event.preventDefault(); alert('Message logged!');">
-                    <div class="mb-5"><input type="text" class="w-full bg-gray-900/50 border border-gray-700 rounded-xl px-5 py-4 text-white focus:border-blue-500 outline-none" placeholder="Your Name"></div>
-                    <div class="mb-5"><input type="email" class="w-full bg-gray-900/50 border border-gray-700 rounded-xl px-5 py-4 text-white focus:border-blue-500 outline-none" placeholder="Email Address"></div>
-                    <div class="mb-8"><textarea class="w-full bg-gray-900/50 border border-gray-700 rounded-xl px-5 py-4 text-white focus:border-blue-500 outline-none h-40" placeholder="Tell me about your project..."></textarea></div>
-                    <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-emerald-600 font-bold py-4 rounded-xl uppercase tracking-widest">Send Message</button>
+
+                <form onsubmit="event.preventDefault(); alert('Message logged!');" class="relative z-10">
+                    <div class="mb-5"><input type="text" class="w-full bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-blue-500 transition placeholder-gray-500" placeholder="Your Name"></div>
+                    <div class="mb-5"><input type="email" class="w-full bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-blue-500 transition placeholder-gray-500" placeholder="Email Address"></div>
+                    <div class="mb-8"><textarea class="w-full bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-blue-500 transition placeholder-gray-500 h-40 resize-none" placeholder="Tell me about your project..."></textarea></div>
+                    <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-emerald-600 hover:from-blue-500 hover:to-emerald-500 text-white font-bold py-4 rounded-xl transition shadow-[0_0_20px_rgba(16,185,129,0.3)] uppercase tracking-widest">Send Message</button>
                 </form>
             </div>
         </section>
     </main>
 
     <script>
-        // --- 0. BACKGROUND THEME ENGINE ---
+        // --- 0. THEME BACKGROUND ENGINE ---
         const themeBackgrounds = {
-            'home': 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2000',
-            'creator': 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=2000',
-            'engineering': 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2000',
-            'blog': 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=2000',
-            'contact': 'https://images.unsplash.com/photo-1528301721190-186c3bd85418?q=80&w=2000'
+            'home': 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2000&q=80', // Tech/Circuit
+            'creator': 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=2000&q=80', // Camera Lens
+            'engineering': 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=2000&q=80', // Machined Gears
+            'blog': 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=2000&q=80', // Abstract Mind/Data
+            'contact': 'https://images.unsplash.com/photo-1528301721190-186c3bd85418?auto=format&fit=crop&w=2000&q=80' // Global Network
         };
 
         function setBackground(tabId) {
-            const img = themeBackgrounds[tabId];
-            // Heavy 94% dark overlay so the scrolling image is very subtle
-            document.body.style.backgroundImage = `linear-gradient(rgba(11, 15, 25, 0.94), rgba(11, 15, 25, 0.94)), url('${img}')`;
+            const imageUrl = themeBackgrounds[tabId];
+            // Uses a linear-gradient to create a heavy dark overlay (92% opacity) directly over the image
+            document.body.style.backgroundImage = `linear-gradient(rgba(11, 15, 25, 0.92), rgba(11, 15, 25, 0.92)), url('${imageUrl}')`;
         }
 
         // --- 1. TAB LOGIC ---
@@ -184,12 +185,24 @@
             window.scrollTo(0,0);
             
             const btn = document.getElementById('btn-' + tabId);
-            if(btn) btn.classList.add(tabId === 'creator' ? 'text-emerald-400' : 'text-blue-400');
-            
-            setBackground(tabId);
+            if(btn) {
+                if(tabId === 'creator') btn.classList.add('text-emerald-400');
+                else if(tabId === 'engineering') btn.classList.add('text-blue-400');
+                else if(tabId === 'home') btn.classList.add('text-blue-400');
+                else btn.classList.add('text-gray-300');
+            }
+
+            setBackground(tabId); // Swap background image
         }
 
-        window.addEventListener('DOMContentLoaded', () => setBackground('home'));
+        window.addEventListener('DOMContentLoaded', () => {
+            setBackground('home'); // Load initial background
+        });
+
+        // --- 2. DP SETTINGS ---
+        fetch('settings.json').then(res => res.json()).then(data => {
+            if(data.profile_pic) document.getElementById('profile-img').src = data.profile_pic;
+        }).catch(e => console.log("Using default profile.jpg"));
 
         // --- 3. MASTER LOADER ---
         const username = 'shamilkaperera'; 
@@ -200,120 +213,254 @@
             try {
                 const res = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${folder}?ref=main&t=${Date.now()}`);
                 if (!res.ok) throw new Error('API Blocked'); 
+                
                 let files = await res.json();
                 files = files.filter(f => f.name.endsWith('.md'));
+                
                 localStorage.setItem(cacheKey, JSON.stringify(files));
                 return files;
             } catch (e) { 
+                console.log(`GitHub API blocked. Loading ${folder} from memory...`);
                 const savedBackup = localStorage.getItem(cacheKey);
                 return savedBackup ? JSON.parse(savedBackup) : [];
             }
         }
 
+        // --- BULLETPROOF EXTRACTOR & DATE PARSER ---
         async function parseMarkdown(file) {
             const res = await fetch(file.download_url);
             const text = await res.text();
+            
             let rawTitle = text.match(/title:\s*(.*)/)?.[1] || file.name.replace('.md', '');
             const title = rawTitle.replace(/^["']|["']$/g, '').trim();
+            
             let rawDate = text.match(/date:\s*(.*)/)?.[1] || "";
             const date = rawDate.replace(/^["']|["']$/g, '').trim();
+
             let rawThumb = text.match(/thumbnail:\s*(.*)/)?.[1] || "";
             let thumb = rawThumb.replace(/^["']|["']$/g, '').trim();
             const fixP = (p) => (p && !p.startsWith('http') && !p.startsWith('/')) ? '/' + p : p;
             thumb = fixP(thumb);
+
             let rawDesc = text.match(/description:\s*(.*)/)?.[1] || text.match(/summary:\s*(.*)/)?.[1] || "";
             let desc = rawDesc.replace(/^["']|["']$/g, '').trim();
-            if (!desc) {
+            
+            if (!desc || desc === "") {
                 let bodyText = text.split('---').pop().trim().replace(/[#*`_\[\]]/g, '').replace(/\n/g, ' ');
-                desc = bodyText.substring(0, 120) + "..."; 
+                if (bodyText.length > 5) {
+                    desc = bodyText.substring(0, 120) + "..."; 
+                }
             }
+
             let gallery = [];
             let inGallery = false;
             const lines = text.split('\n');
+            
             for (let line of lines) {
                 if (line.trim() === '---' && inGallery) break; 
                 if (line.trim().startsWith('gallery:')) { inGallery = true; continue; }
-                if (inGallery && line.trim().startsWith('-')) {
-                    let cleanPath = line.replace('-', '').replace('image:', '').replace(/["']/g, '').trim();
-                    if (cleanPath) gallery.push(fixP(cleanPath));
+                if (inGallery) {
+                    if (line.match(/^[a-zA-Z0-9_]+:/)) { inGallery = false; continue; }
+                    if (line.trim().startsWith('-')) {
+                        let cleanPath = line.replace('-', '').replace('image:', '').replace(/["']/g, '').trim();
+                        if (cleanPath) gallery.push(fixP(cleanPath));
+                    }
                 }
             }
+
             return { title, thumb, desc, text, gallery, date };
         }
 
+        // --- CHRONOLOGICAL RENDER ENGINE ---
         async function renderCards(files, homeGridId, fullGridId, isBlog = false) {
             const homeGrid = document.getElementById(homeGridId);
             const fullGrid = document.getElementById(fullGridId);
-            if (files.length === 0) return;
+            homeGrid.innerHTML = '';
+            fullGrid.innerHTML = '';
+
+            if (files.length === 0) {
+                homeGrid.innerHTML = '<p class="text-gray-500 italic font-light">No posts published yet.</p>';
+                fullGrid.innerHTML = '<p class="text-gray-500 italic font-light">No posts published yet.</p>';
+                return;
+            }
+
             let parsedFiles = [];
-            for (let file of files) parsedFiles.push(await parseMarkdown(file));
-            parsedFiles.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+            for (let file of files) {
+                parsedFiles.push(await parseMarkdown(file));
+            }
+
+            parsedFiles.sort((a, b) => {
+                let dateA = new Date(a.date || 0).getTime();
+                let dateB = new Date(b.date || 0).getTime();
+                return dateB - dateA;
+            });
+
             for (let i = 0; i < parsedFiles.length; i++) {
                 const data = parsedFiles[i];
+                
                 const card = document.createElement('div');
-                card.className = "glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition duration-300 cursor-pointer flex flex-col h-full group";
-                card.innerHTML = `<div class="h-48 bg-gray-950 overflow-hidden"><img src="${data.thumb}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500"></div>
+                card.className = "glass-card rounded-2xl overflow-hidden hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)] transition duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col h-full group";
+                
+                let imageHtml = data.thumb ? `<div class="h-48 bg-gray-950 overflow-hidden"><img src="${data.thumb}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://via.placeholder.com/400x225?text=No+Image'"></div>` : '';
+                
+                card.innerHTML = `
+                    ${imageHtml}
                     <div class="p-6 flex-grow flex flex-col text-left">
-                        <h3 class="text-xl font-bold mb-3 text-white group-hover:text-blue-400 transition">${data.title}</h3>
-                        <p class="text-gray-400 text-sm font-light ${isBlog ? 'line-clamp-3' : 'line-clamp-2'}">${data.desc}</p>
+                        <h3 class="text-xl font-bold mb-3 text-white tracking-tight group-hover:text-blue-400 transition">${data.title}</h3>
+                        <p class="text-gray-400 text-sm font-light leading-relaxed ${isBlog ? 'line-clamp-3' : 'line-clamp-2'}">${data.desc}</p>
                     </div>`;
+                
                 card.onclick = () => openProjectModal(data.title, data.thumb, data.desc, data.text, data.gallery, isBlog);
+
                 fullGrid.appendChild(card.cloneNode(true)).onclick = card.onclick;
                 if (i < 3) homeGrid.appendChild(card);
             }
         }
 
+        // --- FULL SCREEN IMAGE VIEWER (LIGHTBOX) ---
         window.openImageViewer = function(src) {
             const viewer = document.createElement('div');
-            viewer.className = "fixed inset-0 z-[120] bg-black/95 flex items-center justify-center cursor-zoom-out backdrop-blur-md";
-            viewer.innerHTML = `<button class="absolute top-6 left-6 text-white text-2xl z-[130] bg-gray-800 rounded-full w-12 h-12 flex items-center justify-center border border-gray-700 shadow-xl"><i class="fas fa-arrow-left"></i></button>
-                               <img src="${src}" class="max-w-full max-h-full object-contain p-8">`;
+            viewer.className = "fixed inset-0 z-[120] bg-black/95 flex items-center justify-center animate-fadeIn cursor-zoom-out backdrop-blur-md";
+            
+            viewer.innerHTML = `
+                <button class="absolute top-6 left-6 text-white text-xl md:text-2xl hover:text-emerald-400 z-[130] bg-gray-900/50 hover:bg-gray-800 rounded-full w-12 h-12 flex items-center justify-center backdrop-blur-md transition border border-gray-700 shadow-xl cursor-pointer" onclick="event.stopPropagation(); this.parentElement.remove()">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <img src="${src}" class="max-w-full max-h-full object-contain p-4 md:p-8" onclick="event.stopPropagation();">
+            `;
+            
             viewer.onclick = () => viewer.remove();
             document.body.appendChild(viewer);
         };
 
+        // --- COMPACT POPUP MODAL ---
         function openProjectModal(title, thumb, desc, fullText, gallery, isBlog = false) {
             const modal = document.createElement('div');
             modal.className = "fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm overflow-y-auto custom-scrollbar";
             
-            let rawBody = fullText.split('---').pop().trim();
-            let formattedBody = marked.parse(rawBody); // Converts Markdown to HTML
+            let allPics = [];
+            if (thumb) allPics.push(thumb);
+            gallery.forEach(img => { if (!allPics.includes(img)) allPics.push(img); });
 
+            const imgClasses = "w-full object-cover rounded-xl border border-gray-700 shadow-lg cursor-pointer hover:opacity-80 transition duration-300 hover:ring-2 hover:ring-emerald-500 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)]";
+            
             let contentHtml = "";
+
             if (isBlog) {
-                contentHtml = `<div class="mb-8 text-left border-b border-gray-800 pb-8"><h2 class="text-4xl md:text-5xl font-black text-white mb-4 leading-tight">${title}</h2><p class="text-emerald-400 font-medium text-lg border-l-4 border-emerald-500 pl-5 bg-emerald-900/10 py-2 rounded-r-lg">${desc}</p></div>
-                              <img src="${thumb}" class="w-full h-auto max-h-[500px] object-cover rounded-2xl mb-10 border border-gray-700 shadow-2xl cursor-pointer" onclick="openImageViewer(this.src)">
-                              <div class="markdown-content text-left">${formattedBody}</div>
-                              <div class="mt-16 pt-8 border-t border-gray-800"><h3 class="text-2xl font-bold text-white mb-4 tracking-tight">Join the Discussion</h3><div id="disqus_thread" class="bg-gray-100 p-4 md:p-6 rounded-2xl text-gray-900 shadow-inner"></div></div>`;
+                // --- PURE, CLEAN BLOG LAYOUT (NO GRID) ---
+                let rawBody = fullText.split('---').pop().trim();
+                
+                let formattedBody = rawBody
+                    .replace(/!\[.*?\]\((.*?)\)/g, '<img src="$1" class="w-full h-auto max-h-[500px] object-cover rounded-2xl my-10 border border-gray-700 shadow-2xl cursor-pointer hover:opacity-90 transition hover:ring-2 hover:ring-blue-500" onclick="openImageViewer(this.src)">')
+                    .replace(/\n/g, '<br>');
+
+                contentHtml = `
+                    <div class="mb-8 pr-8 text-left border-b border-gray-800/60 pb-8">
+                        <h2 class="text-3xl md:text-5xl font-black text-white mb-4 leading-tight tracking-tight drop-shadow-md">${title}</h2>
+                        ${desc ? `<p class="text-emerald-400 font-medium text-lg border-l-4 border-emerald-500 pl-5 bg-emerald-900/10 py-2 rounded-r-lg">${desc}</p>` : ''}
+                    </div>
+                    
+                    ${thumb ? `<img src="${thumb}" class="w-full h-auto max-h-[500px] object-cover rounded-2xl mb-10 border border-gray-700 shadow-2xl cursor-pointer hover:opacity-90 transition hover:ring-2 hover:ring-blue-500" onclick="openImageViewer(this.src)">` : ''}
+                    
+                    <div class="mt-6 text-gray-300 text-lg md:text-xl leading-relaxed font-light text-left">
+                        ${formattedBody}
+                    </div>
+                    
+                    <div class="mt-16 pt-8 border-t border-gray-800/60">
+                        <h3 class="text-2xl font-bold text-white mb-2 tracking-tight">Join the Discussion</h3>
+                        <p class="text-gray-500 text-sm mb-6 font-light">You can comment anonymously by checking the "I'd rather post as a guest" box.</p>
+                        <div id="disqus_thread" class="bg-gray-100 p-4 md:p-6 rounded-2xl shadow-inner text-gray-900"></div>
+                    </div>
+                `;
+
             } else {
-                contentHtml = `<div class="mb-6 border-b border-gray-800/60 pb-6 text-left"><h2 class="text-2xl md:text-4xl font-black text-white mb-3 uppercase tracking-tighter">${title}</h2><p class="text-emerald-400 font-medium pl-4 border-l-4 border-emerald-500 bg-emerald-900/10 py-1.5 rounded-r-lg">${desc}</p></div>
-                              <img src="${thumb}" class="w-full h-auto rounded-2xl mb-8" onclick="openImageViewer(this.src)">
-                              <div class="markdown-content bg-gray-900/60 p-6 rounded-2xl border border-gray-700/50 text-left shadow-inner">${formattedBody}</div>`;
+                // --- STANDARD CREATOR/ENGINEERING LAYOUT (WITH GRID) ---
+                let gridLayout = "";
+                if (allPics.length === 1) {
+                    gridLayout = `<img src="${allPics[0]}" class="${imgClasses} rounded-2xl shadow-2xl" onclick="openImageViewer(this.src)">`;
+                } else if (allPics.length > 1) {
+                    gridLayout = `
+                        <div class="flex flex-col gap-3">
+                            <img src="${allPics[0]}" class="${imgClasses} h-64 md:h-[400px] rounded-2xl" onclick="openImageViewer(this.src)">
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                                ${allPics.slice(1).map(img => `<img src="${img}" class="${imgClasses} h-28 md:h-40 rounded-xl" onclick="openImageViewer(this.src)">`).join('')}
+                            </div>
+                        </div>`;
+                }
+
+                contentHtml = `
+                    <div class="mb-6 pr-8 text-left border-b border-gray-800/60 pb-6">
+                        <h2 class="text-2xl md:text-4xl font-black text-white mb-3 leading-tight uppercase tracking-tighter drop-shadow-md">${title}</h2>
+                        ${desc ? `<p class="text-emerald-400 font-medium border-l-4 border-emerald-500 pl-4 text-sm md:text-base bg-emerald-900/10 py-1.5 rounded-r-lg">${desc}</p>` : ''}
+                    </div>
+                    <div class="mb-8">${gridLayout}</div>
+                    <div class="mt-8 pt-2 text-gray-300 text-sm md:text-base leading-relaxed font-light text-left">
+                        <div class="bg-gray-900/60 backdrop-blur-md p-6 rounded-2xl border border-gray-700/50 shadow-inner">
+                            ${fullText.split('---').pop().trim().replace(/\n/g, '<br>')}
+                        </div>
+                    </div>
+                `;
             }
 
-            modal.innerHTML = `<div class="glass-card border border-gray-700 shadow-[0_20px_50px_rgba(0,0,0,0.7)] max-w-4xl w-full rounded-3xl relative my-8 overflow-hidden">
-                               <button class="absolute top-5 right-5 text-gray-400 hover:text-red-400 z-[110] bg-gray-900/60 rounded-full w-12 h-12 flex items-center justify-center border border-gray-700 shadow-xl transition" onclick="this.parentElement.parentElement.remove()"><i class="fas fa-times text-xl"></i></button>
-                               <div class="p-6 md:p-12 h-full max-h-[85vh] overflow-y-auto custom-scrollbar">${contentHtml}</div></div>`;
+            let modalWidth = isBlog ? 'max-w-4xl' : 'max-w-4xl'; 
+
+            modal.innerHTML = `
+                <div class="glass-card border border-gray-700 shadow-[0_20px_50px_rgba(0,0,0,0.7)] ${modalWidth} w-full rounded-3xl relative my-8 text-left overflow-hidden">
+                    <button class="absolute top-5 right-5 text-gray-400 hover:text-red-400 hover:bg-red-900/20 z-[110] bg-gray-900/60 backdrop-blur-md rounded-full w-12 h-12 flex items-center justify-center border border-gray-700 shadow-xl transition duration-200" onclick="this.parentElement.parentElement.remove()">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                    
+                    <div class="p-6 md:p-12 h-full max-h-[85vh] overflow-y-auto custom-scrollbar">
+                        ${contentHtml}
+                    </div>
+                </div>
+            `;
             document.body.appendChild(modal);
-            if (isBlog) initDisqus(title);
+
+            if (isBlog) {
+                initDisqus(title);
+            }
         }
 
+        // --- DISQUS INITIALIZATION ---
         function initDisqus(pageTitle) {
             const disqus_shortname = 'shamilkaperera'; 
+            
             if (window.DISQUS) {
-                DISQUS.reset({ reload: true, config: function () { this.page.identifier = pageTitle; this.page.url = window.location.href.split('#')[0] + "#" + pageTitle.replace(/[^a-zA-Z0-9]/g, '-'); this.page.title = pageTitle; } });
+                DISQUS.reset({
+                    reload: true,
+                    config: function () {  
+                        this.page.identifier = pageTitle;  
+                        this.page.url = window.location.href.split('#')[0] + "#" + pageTitle.replace(/[^a-zA-Z0-9]/g, '-');
+                        this.page.title = pageTitle;
+                    }
+                });
             } else {
-                window.disqus_config = function () { this.page.identifier = pageTitle; this.page.url = window.location.href.split('#')[0] + "#" + pageTitle.replace(/[^a-zA-Z0-9]/g, '-'); this.page.title = pageTitle; };
-                (function() { var d = document, s = d.createElement('script'); s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; s.setAttribute('data-timestamp', +new Date()); (d.head || d.body).appendChild(s); })();
+                window.disqus_config = function () {
+                    this.page.identifier = pageTitle;
+                    this.page.url = window.location.href.split('#')[0] + "#" + pageTitle.replace(/[^a-zA-Z0-9]/g, '-');
+                    this.page.title = pageTitle;
+                };
+                (function() {
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
             }
         }
 
+        // --- INITIALIZE SITE ---
         async function buildSite() {
-            const [c, e, b] = await Promise.all([fetchFolder('creator-work'), fetchFolder('engineering-work'), fetchFolder('posts')]);
-            await renderCards(c, 'home-creator-grid', 'full-creator-grid');
-            await renderCards(e, 'home-engineering-grid', 'full-engineering-grid');
-            await renderCards(b, 'home-blog-grid', 'full-blog-grid', true);
+            const creatorFiles = await fetchFolder('creator-work');
+            const engFiles = await fetchFolder('engineering-work');
+            const blogFiles = await fetchFolder('posts');
+
+            await renderCards(creatorFiles, 'home-creator-grid', 'full-creator-grid');
+            await renderCards(engFiles, 'home-engineering-grid', 'full-engineering-grid');
+            await renderCards(blogFiles, 'home-blog-grid', 'full-blog-grid', true);
         }
+
         buildSite();
     </script>
 </body>
