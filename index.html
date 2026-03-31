@@ -119,10 +119,10 @@
 
     // 2. Load Profile Pic
     fetch('settings.json').then(res => res.json()).then(data => {
-        if(data.profile_pic) document.getElementById('profile-img').src = data.profile_pic;
+        if(data && data.profile_pic) document.getElementById('profile-img').src = data.profile_pic;
     }).catch(e => console.log("Using default profile.jpg"));
 
-    // 3. SMART LOADER (Fixed for Titles and Thumbnails)
+    // 3. SMART LOADER
     async function loadProjects(folder, gridId) {
         const username = 'shamilkaperera'; 
         const repo = 'shamilkaperera.github.io'; 
@@ -139,29 +139,34 @@
                         const contentRes = await fetch(file.download_url);
                         const text = await contentRes.text();
                         
-                        // BETTER DATA EXTRACTION (Regex)
+                        // Extract Title, Thumbnail, and Description
                         const title = text.match(/title:\s*"(.*?)"/)?.[1] || text.match(/title:\s*(.*)/)?.[1] || file.name.replace('.md', '');
                         let thumb = text.match(/thumbnail:\s*"(.*?)"/)?.[1] || text.match(/thumbnail:\s*(.*)/)?.[1] || "";
                         const desc = text.match(/description:\s*"(.*?)"/)?.[1] || text.match(/description:\s*(.*)/)?.[1] || "";
                         
-                        // Extract all images from the gallery list if they exist
-                        const galleryMatches = [...text.matchAll(/image:\s*"(.*?)"/g)].map(m => m[1]);
+                        // FIX: Extract ALL images from the gallery list
+                        const galleryRegex = /image:\s*"(.*?)"/g;
+                        let galleryImages = [];
+                        let match;
+                        while ((match = galleryRegex.exec(text)) !== null) {
+                            galleryImages.push(match[1]);
+                        }
 
-                        // Path Fix: Ensure thumbnails load from the root images folder
+                        // Path Fix
                         if (thumb && !thumb.startsWith('http') && !thumb.startsWith('/')) thumb = '/' + thumb;
 
                         const card = document.createElement('div');
                         card.className = "bg-gray-800 rounded-xl overflow-hidden hover:shadow-2xl transition transform hover:-translate-y-2 border border-gray-700 cursor-pointer";
                         card.innerHTML = `
                             <div class="h-48 w-full bg-gray-900 flex items-center justify-center overflow-hidden">
-                                <img src="${thumb}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/400x200?text=Industrial+Project'">
+                                <img src="${thumb}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/400x200?text=Project'">
                             </div>
                             <div class="p-5 text-left">
                                 <h3 class="text-xl font-bold mb-2 text-white">${title}</h3>
                                 <p class="text-gray-400 text-sm line-clamp-2">${desc}</p>
                             </div>`;
                         
-                        card.onclick = () => openProjectModal(title, thumb, desc, text, galleryMatches);
+                        card.onclick = () => openProjectModal(title, thumb, desc, text, galleryImages);
                         grid.appendChild(card);
                     }
                 }
@@ -169,31 +174,36 @@
         } catch (e) { console.error("Error loading:", e); }
     }
 
-    // 4. MULTI-IMAGE MODAL (Popup with Gallery)
+    // 4. MODAL WITH ALL IMAGES
     function openProjectModal(title, thumb, desc, fullText, gallery) {
         const modal = document.createElement('div');
         modal.className = "fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black bg-opacity-95 overflow-y-auto";
         
-        // Build the gallery HTML (All uploaded images)
-        let galleryHtml = `<img src="${thumb}" class="w-full rounded-lg mb-4 shadow-lg border border-gray-700">`;
+        // Add the main thumbnail first
+        let allImagesHtml = `<img src="${thumb}" class="w-full rounded-lg mb-6 shadow-xl border border-gray-800">`;
+        
+        // Add all other images from the gallery list
         gallery.forEach(imgUrl => {
             let fixedUrl = imgUrl.startsWith('http') || imgUrl.startsWith('/') ? imgUrl : '/' + imgUrl;
-            galleryHtml += `<img src="${fixedUrl}" class="w-full rounded-lg mb-4 shadow-lg border border-gray-700">`;
+            // Avoid duplicating the thumbnail if it's also in the gallery
+            if (fixedUrl !== thumb) {
+                allImagesHtml += `<img src="${fixedUrl}" class="w-full rounded-lg mb-6 shadow-xl border border-gray-800">`;
+            }
         });
 
         modal.innerHTML = `
-            <div class="bg-gray-900 border border-gray-800 max-w-4xl w-full rounded-2xl relative shadow-2xl my-auto">
-                <button class="absolute top-4 right-4 text-white text-3xl hover:text-red-500 z-10" onclick="this.parentElement.parentElement.remove()">×</button>
-                <div class="p-6 md:p-10 h-full max-h-[90vh] overflow-y-auto">
-                    <h2 class="text-3xl md:text-4xl font-extrabold mb-2 text-white">${title}</h2>
-                    <p class="text-emerald-400 font-medium mb-8">${desc}</p>
+            <div class="bg-gray-900 border border-gray-800 max-w-4xl w-full rounded-3xl relative shadow-2xl my-8">
+                <button class="fixed top-6 right-6 text-white text-4xl hover:text-red-500 z-[110] bg-gray-800 rounded-full w-12 h-12 flex items-center justify-center" onclick="this.parentElement.parentElement.remove()">×</button>
+                <div class="p-6 md:p-12 h-full max-h-[85vh] overflow-y-auto custom-scrollbar">
+                    <h2 class="text-3xl md:text-5xl font-black mb-4 text-white leading-tight">${title}</h2>
+                    <p class="text-emerald-400 text-lg font-medium mb-10 border-l-4 border-emerald-400 pl-4">${desc}</p>
                     
-                    <div class="grid grid-cols-1 gap-4 mb-8">
-                        ${galleryHtml}
+                    <div class="flex flex-col space-y-4">
+                        ${allImagesHtml}
                     </div>
 
-                    <div class="prose prose-invert text-gray-300 border-t border-gray-800 pt-6">
-                        ${fullText.split('---').pop().replace(/\n/g, '<br>')}
+                    <div class="mt-10 pt-10 border-t border-gray-800 text-gray-300 text-lg leading-relaxed">
+                        ${fullText.split('---').pop().trim().replace(/\n/g, '<br>')}
                     </div>
                 </div>
             </div>
