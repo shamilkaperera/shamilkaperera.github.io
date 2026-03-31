@@ -16,7 +16,8 @@
         .custom-scrollbar::-webkit-scrollbar { width: 8px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: #0B0F19; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #1F2937; border-radius: 10px; }
-        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -29,12 +30,12 @@
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-center space-x-4">
-                        <button onclick="switchTab('home')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:text-blue-400 transition" id="btn-home">Home</button>
+                        <button onclick="switchTab('home')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium text-blue-400 transition" id="btn-home">Home</button>
                         <button onclick="switchTab('creator')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:text-blue-400 transition" id="btn-creator">Creator</button>
                         <button onclick="switchTab('engineering')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:text-blue-400 transition" id="btn-engineering">Engineering</button>
                         <button onclick="switchTab('blog')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:text-blue-400 transition" id="btn-blog">Blog</button>
                         <button onclick="switchTab('contact')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium hover:text-blue-400 transition" id="btn-contact">Contact</button>
-                        <a href="/admin/index.html" class="ml-4 text-gray-600 hover:text-emerald-400 transition text-sm"><i class="fas fa-lock"></i> Admin</a>
+                        <a href="/admin/index.html" class="ml-4 text-gray-600 hover:text-emerald-400 transition text-sm"><i class="fas fa-lock"></i></a>
                     </div>
                 </div>
             </div>
@@ -44,48 +45,75 @@
     <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
 
         <section id="home" class="tab-content active">
-            <div class="flex flex-col md:flex-row items-center justify-between mt-10">
+            
+            <div class="flex flex-col md:flex-row items-center justify-between mt-10 mb-24">
                 <div class="md:w-1/2 text-left">
-                    <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
+                    <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-6">
                         Engineering Mechanisms.<br>
                         <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Directing Realities.</span>
                     </h1>
                     <p class="text-gray-400 text-lg mb-8 max-w-lg">
                         I am a Mechanical Engineering student at the University of Peradeniya, but my main focus is building a career as a professional Content Creator and 3D Visual Artist.
                     </p>
-                    <div class="flex space-x-4">
-                        <button onclick="switchTab('creator')" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition transform hover:-translate-y-1">View Portfolio</button>
+                    
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <button onclick="switchTab('creator')" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition transform hover:-translate-y-1">View Creator Portfolio</button>
+                        <button onclick="switchTab('engineering')" class="bg-transparent border border-gray-600 hover:border-gray-400 text-white font-semibold py-3 px-8 rounded-full transition transform hover:-translate-y-1">Engineering Projects</button>
                     </div>
                 </div>
                 <div class="md:w-1/2 mt-10 md:mt-0 flex justify-center">
                     <img id="profile-img" src="profile.jpg" alt="Profile" class="w-72 h-72 md:w-96 md:h-96 rounded-full object-cover border-4 border-gray-800 shadow-2xl">
                 </div>
             </div>
+
+            <div class="mb-20">
+                <div class="flex justify-between items-end border-b border-gray-800 pb-2 mb-6">
+                    <h3 class="text-2xl font-bold text-emerald-400">Latest Creator Work</h3>
+                    <button onclick="switchTab('creator')" class="text-sm text-gray-400 hover:text-white transition">View All →</button>
+                </div>
+                <div id="home-creator-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+                    <p class="text-gray-600 italic">Syncing projects...</p>
+                </div>
+            </div>
+
+            <div class="mb-20">
+                <div class="flex justify-between items-end border-b border-gray-800 pb-2 mb-6">
+                    <h3 class="text-2xl font-bold text-blue-500">Latest Engineering Projects</h3>
+                    <button onclick="switchTab('engineering')" class="text-sm text-gray-400 hover:text-white transition">View All →</button>
+                </div>
+                <div id="home-engineering-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+                    <p class="text-gray-600 italic">Syncing projects...</p>
+                </div>
+            </div>
+
+            <div class="mb-10">
+                <div class="flex justify-between items-end border-b border-gray-800 pb-2 mb-6">
+                    <h3 class="text-2xl font-bold text-gray-300">Recent Insights</h3>
+                    <button onclick="switchTab('blog')" class="text-sm text-gray-400 hover:text-white transition">Read All →</button>
+                </div>
+                <div id="home-blog-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+                    <p class="text-gray-600 italic">Syncing posts...</p>
+                </div>
+            </div>
         </section>
 
         <section id="creator" class="tab-content">
             <h2 class="text-3xl font-bold mb-8 border-b border-gray-800 pb-4 text-emerald-400 text-left">Content Creation & 3D</h2>
-            <div id="creator-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
-                <p class="text-gray-500 italic">Syncing creative works...</p>
-            </div>
+            <div id="full-creator-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left"></div>
         </section>
 
         <section id="engineering" class="tab-content">
             <h2 class="text-3xl font-bold mb-8 border-b border-gray-800 pb-4 text-blue-500 text-left">Engineering Projects</h2>
-            <div id="engineering-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
-                <p class="text-gray-500 italic">Syncing engineering data...</p>
-            </div>
+            <div id="full-engineering-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left"></div>
         </section>
 
         <section id="blog" class="tab-content text-left">
-            <h2 class="text-3xl font-bold mb-8 border-b border-gray-800 pb-4 text-gray-400">Insights & Articles</h2>
-            <div id="blog-list" class="space-y-6 max-w-3xl">
-                <p class="text-gray-500 italic">Writing desk is empty.</p>
-            </div>
+            <h2 class="text-3xl font-bold mb-8 border-b border-gray-800 pb-4 text-gray-300">Insights & Articles</h2>
+            <div id="full-blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left"></div>
         </section>
 
         <section id="contact" class="tab-content">
-            <div class="max-w-2xl mx-auto bg-gray-900 p-8 rounded-3xl border border-gray-800 shadow-xl mt-10">
+            <div class="max-w-2xl mx-auto bg-gray-900 p-8 rounded-3xl border border-gray-800 shadow-xl mt-10 text-left">
                 <h2 class="text-3xl font-bold mb-6 text-center text-white">Let's Collaborate</h2>
                 <form onsubmit="event.preventDefault(); alert('Message logged!');">
                     <div class="mb-4"><input type="text" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500" placeholder="Your Name"></div>
@@ -98,128 +126,144 @@
     </main>
 
     <script>
-        // --- 1. Tab Switching (No Change) ---
+        // --- 1. TAB LOGIC ---
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('text-blue-400', 'text-emerald-400'));
+            document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('text-blue-400', 'text-emerald-400', 'text-gray-300'));
             document.getElementById(tabId).classList.add('active');
+            window.scrollTo(0,0);
             const btn = document.getElementById('btn-' + tabId);
-            if(btn) btn.classList.add(tabId === 'creator' ? 'text-emerald-400' : 'text-blue-400');
+            if(btn) {
+                if(tabId === 'creator') btn.classList.add('text-emerald-400');
+                else if(tabId === 'engineering') btn.classList.add('text-blue-400');
+                else if(tabId === 'home') btn.classList.add('text-blue-400');
+                else btn.classList.add('text-gray-300');
+            }
         }
 
-        // --- 2. Load Profile Pic Settings (No Change) ---
+        // --- 2. DP SETTINGS ---
         fetch('settings.json').then(res => res.json()).then(data => {
             if(data.profile_pic) document.getElementById('profile-img').src = data.profile_pic;
         }).catch(e => console.log("Using default profile.jpg"));
 
-        // --- 3. ROBUST SMART LOADER ---
-        async function loadProjects(folder, gridId) {
-            const username = 'shamilkaperera'; 
-            const repo = 'shamilkaperera.github.io'; 
-            const grid = document.getElementById(gridId);
+        // --- 3. MASTER LOADER (Fetches & Sorts) ---
+        const username = 'shamilkaperera'; 
+        const repo = 'shamilkaperera.github.io'; 
 
+        async function fetchFolder(folder) {
             try {
-                // BUG FIX: Ensure path is exact for GitHub API and prevent caching
-                const url = `https://api.github.com/repos/${username}/${repo}/contents/${folder}?ref=main&t=${Date.now()}`;
+                const res = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${folder}?ref=main&t=${Date.now()}`);
+                if (!res.ok) return [];
+                let files = await res.json();
                 
-                const response = await fetch(url);
-                
-                // diagnostic box logic (from previous answer)
-                if (!response.ok) {
-                    if (response.status === 403) throw new Error('🚨 GitHub Rate Limit Exceeded! (Wait 45 minutes for the API to unlock)');
-                    if (response.status === 404) throw new Error(`📁 Folder '${folder}' not found on the 'main' branch. Check your spelling.`);
-                    throw new Error(`⚠️ HTTP Error ${response.status}`);
-                }
-                
-                const files = await response.json();
-
-                if (files && files.length > 0) {
-                    grid.innerHTML = ''; 
-                    for (const file of files) {
-                        if (file.name.endsWith('.md')) {
-                            const contentRes = await fetch(file.download_url);
-                            const text = await contentRes.text();
-                            
-                            // Extract Data from Markdown
-                            const title = text.match(/title:\s*"(.*?)"/)?.[1] || text.match(/title:\s*(.*)/)?.[1] || file.name.replace('.md', '');
-                            let thumb = text.match(/thumbnail:\s*"(.*?)"/)?.[1] || text.match(/thumbnail:\s*(.*)/)?.[1] || "";
-                            const desc = text.match(/description:\s*"(.*?)"/)?.[1] || text.match(/description:\s*(.*)/)?.[1] || "";
-                            
-                            // BUG FIX 1: Path normalization (leading slash)
-                            const fixPath = (p) => (p && !p.startsWith('http') && !p.startsWith('/')) ? '/' + p : p;
-                            thumb = fixPath(thumb);
-
-                            // Extract every single image URL from the gallery list in CMS
-                            const galleryRegex = /image:\s*"(.*?)"/g;
-                            let gallery = [];
-                            let match;
-                            while ((match = galleryRegex.exec(text)) !== null) {
-                                // BUG FIX 2: Normalized paths here as well
-                                gallery.push(fixPath(match[1]));
-                            }
-
-                            const card = document.createElement('div');
-                            card.className = "bg-gray-800/40 rounded-2xl overflow-hidden hover:shadow-2xl transition transform hover:-translate-y-2 border border-gray-800 cursor-pointer";
-                            card.innerHTML = `
-                                <div class="h-52 bg-gray-900 flex items-center justify-center overflow-hidden">
-                                    <img src="${thumb}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/400x225?text=Project+Thumbnail'">
-                                </div>
-                                <div class="p-5 text-left">
-                                    <h3 class="text-xl font-bold mb-2 text-white">${title}</h3>
-                                    <p class="text-gray-400 text-sm line-clamp-2">${desc}</p>
-                                </div>`;
-                            
-                            card.onclick = () => openProjectModal(title, thumb, desc, text, gallery);
-                            grid.appendChild(card);
-                        }
-                    }
-                } else { grid.innerHTML = '<p class="text-gray-600 col-span-full italic text-center p-4">No published projects in this folder yet.</p>'; }
-            } catch (error) { grid.innerHTML = `<div class="col-span-full bg-red-900/20 border border-red-500/30 p-4 rounded-xl"><p class="text-red-400 font-bold">${error.message}</p></div>`; }
+                // Keep only .md files, and REVERSE them so newest is always first
+                files = files.filter(f => f.name.endsWith('.md')).reverse();
+                return files;
+            } catch (e) { return []; }
         }
 
-        // --- 4. MODAL GENERATOR: Scaled to 67% FOOTPRINT with Multi-Image Grid Fix ---
+        async function parseMarkdown(file) {
+            const res = await fetch(file.download_url);
+            const text = await res.text();
+            
+            // Extract text data
+            const title = text.match(/title:\s*["']?(.*?)["']?(?:\n|$)/)?.[1] || file.name.replace('.md', '');
+            let thumb = text.match(/thumbnail:\s*["']?(.*?)["']?(?:\n|$)/)?.[1] || "";
+            const desc = text.match(/description:\s*["']?(.*?)["']?(?:\n|$)/)?.[1] || "";
+            
+            const fixP = (p) => (p && !p.startsWith('http') && !p.startsWith('/')) ? '/' + p : p;
+            thumb = fixP(thumb.trim());
+
+            // THE FIX: Super robust Regex to find images with OR without quotes in the CMS list
+            const galleryRegex = /image:\s*["']?([^"'\n\r]+)["']?/g;
+            let gallery = [];
+            let m;
+            while ((m = galleryRegex.exec(text)) !== null) {
+                gallery.push(fixP(m[1].trim()));
+            }
+
+            return { title, thumb, desc, text, gallery };
+        }
+
+        async function renderCards(files, homeGridId, fullGridId, isBlog = false) {
+            const homeGrid = document.getElementById(homeGridId);
+            const fullGrid = document.getElementById(fullGridId);
+            homeGrid.innerHTML = '';
+            fullGrid.innerHTML = '';
+
+            if (files.length === 0) {
+                homeGrid.innerHTML = '<p class="text-gray-600 italic">No posts published yet.</p>';
+                fullGrid.innerHTML = '<p class="text-gray-600 italic">No posts published yet.</p>';
+                return;
+            }
+
+            for (let i = 0; i < files.length; i++) {
+                const data = await parseMarkdown(files[i]);
+                
+                const card = document.createElement('div');
+                card.className = "bg-gray-800/40 rounded-2xl overflow-hidden hover:shadow-2xl transition transform hover:-translate-y-2 border border-gray-800 cursor-pointer flex flex-col h-full";
+                
+                let imageHtml = data.thumb ? `<div class="h-48 bg-gray-900 overflow-hidden"><img src="${data.thumb}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/400x225?text=No+Image'"></div>` : '';
+                
+                card.innerHTML = `
+                    ${imageHtml}
+                    <div class="p-5 flex-grow flex flex-col">
+                        <h3 class="text-xl font-bold mb-2 text-white">${data.title}</h3>
+                        <p class="text-gray-400 text-sm ${isBlog ? 'line-clamp-3' : 'line-clamp-2'}">${data.desc}</p>
+                    </div>`;
+                
+                card.onclick = () => openProjectModal(data.title, data.thumb, data.desc, data.text, data.gallery);
+
+                // Add to Full Tab
+                fullGrid.appendChild(card.cloneNode(true)).onclick = card.onclick;
+                
+                // Add to Home Preview (Only the first 3!)
+                if (i < 3) {
+                    homeGrid.appendChild(card);
+                }
+            }
+        }
+
+        // --- 4. THE COMPACT, MULTI-IMAGE POPUP MODAL ---
         function openProjectModal(title, thumb, desc, fullText, gallery) {
             const modal = document.createElement('div');
-            // Overlay (Keep inset-0 for full-screen)
-            modal.className = "fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black bg-opacity-90 overflow-y-auto";
+            modal.className = "fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/95 overflow-y-auto custom-scrollbar";
             
-            // combine the thumbnail and the gallery images, filter duplicates
-            let allProjectImages = [thumb, ...gallery.filter(i => i !== thumb)];
+            // Combine thumbnail and all gallery images, removing duplicates
+            let allPics = [];
+            if (thumb) allPics.push(thumb);
+            gallery.forEach(img => { if (!allPics.includes(img)) allPics.push(img); });
 
-            // Build the multi-image mosaic grid (The Facebook style you wanted)
+            // Create the scaled-down grid layout
             let gridLayout = "";
-            if (allProjectImages.length === 1) {
-                // single image
-                gridLayout = `<img src="${allProjectImages[0]}" class="w-full rounded-lg mb-4 shadow-lg border border-gray-800">`;
+            if (allPics.length === 1) {
+                gridLayout = `<img src="${allPics[0]}" class="w-full rounded-xl border border-gray-700 shadow-lg">`;
             } else {
-                // mosaic grid
+                // Large hero image, smaller grid below
                 gridLayout = `
                     <div class="flex flex-col gap-2">
-                        <img src="${allProjectImages[0]}" class="w-full h-48 md:h-72 object-cover rounded-t-xl border border-gray-800">
-                        
+                        <img src="${allPics[0]}" class="w-full h-56 md:h-72 object-cover rounded-xl border border-gray-700 shadow-lg">
                         <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
-                            ${allProjectImages.slice(1).map(img => `
-                                <img src="${img}" class="w-full h-24 md:h-32 object-cover rounded-lg border border-gray-800 shadow-md">
-                            `).join('')}
+                            ${allPics.slice(1).map(img => `<img src="${img}" class="w-full h-24 md:h-32 object-cover rounded-lg border border-gray-700 shadow-md">`).join('')}
                         </div>
                     </div>`;
             }
 
             modal.innerHTML = `
-                <div class="bg-gray-950 border border-gray-800 max-w-3xl w-full rounded-2xl relative shadow-2xl my-auto text-left overflow-hidden">
-                    <button class="fixed top-6 right-6 text-white text-3xl hover:text-red-500 z-[110] bg-gray-900 rounded-full w-12 h-12 flex items-center justify-center border border-gray-700 shadow-xl" onclick="this.parentElement.parentElement.remove()">×</button>
+                <div class="bg-gray-950 border border-gray-800 max-w-3xl w-full rounded-2xl relative shadow-2xl my-8 text-left overflow-hidden">
+                    <button class="absolute top-4 right-4 text-white text-3xl hover:text-red-500 z-[110] bg-gray-900 rounded-full w-10 h-10 flex items-center justify-center border border-gray-700 shadow-xl" onclick="this.parentElement.parentElement.remove()">×</button>
                     
-                    <div class="p-4 md:p-8 h-full max-h-[85vh] overflow-y-auto custom-scrollbar">
+                    <div class="p-6 md:p-8 h-full max-h-[85vh] overflow-y-auto custom-scrollbar">
                         
-                        <div class="mb-4 text-left">
-                            <h2 class="text-2xl md:text-3xl font-black text-white leading-none mb-2 uppercase tracking-tighter">${title}</h2>
-                            <p class="text-emerald-400 font-medium border-l-4 border-emerald-500 pl-4 text-base">${desc}</p>
+                        <div class="mb-5 pr-8 text-left">
+                            <h2 class="text-2xl md:text-3xl font-bold text-white mb-2 leading-tight uppercase tracking-tight">${title}</h2>
+                            ${desc ? `<p class="text-emerald-400 font-medium border-l-4 border-emerald-500 pl-4 text-sm">${desc}</p>` : ''}
                         </div>
-
-                        <div class="mb-6 shadow-2xl">${gridLayout}</div>
-
-                        <div class="mt-8 pt-8 border-t border-gray-800 text-gray-300 text-base leading-relaxed">
-                            <div class="bg-gray-900/40 p-6 rounded-2xl border border-gray-800/50">
+                        
+                        <div class="mb-8">${gridLayout}</div>
+                        
+                        <div class="mt-6 pt-6 border-t border-gray-800 text-gray-300 text-sm leading-relaxed font-light text-left">
+                            <div class="bg-gray-900/40 p-5 rounded-xl border border-gray-800/50">
                                 ${fullText.split('---').pop().trim().replace(/\n/g, '<br>')}
                             </div>
                         </div>
@@ -229,9 +273,20 @@
             document.body.appendChild(modal);
         }
 
-        // INITIAL LOAD
-        loadProjects('creator-work', 'creator-grid');
-        loadProjects('engineering-work', 'engineering-grid');
+        // --- 5. INITIALIZE EVERYTHING ---
+        async function buildSite() {
+            // Fetch all 3 folders from GitHub
+            const creatorFiles = await fetchFolder('creator-work');
+            const engFiles = await fetchFolder('engineering-work');
+            const blogFiles = await fetchFolder('posts');
+
+            // Render the cards to the Home section and the Full Tabs simultaneously
+            await renderCards(creatorFiles, 'home-creator-grid', 'full-creator-grid');
+            await renderCards(engFiles, 'home-engineering-grid', 'full-engineering-grid');
+            await renderCards(blogFiles, 'home-blog-grid', 'full-blog-grid', true);
+        }
+
+        buildSite();
     </script>
 </body>
 </html>
