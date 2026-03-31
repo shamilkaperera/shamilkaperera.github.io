@@ -1,5 +1,6 @@
 ---
 title: 🖤Honda Valkyrie F6C 🖤 UE5 blender
+date: 2024-01-31T14:08:00
 thumbnail: /images/475140136_122229472256068965_5331437234709284738_n.jpg
 description: 'A modern showroom environment built to showcase the Honda Valkyrie F6C.  Pipeline: Asset prep and modeling in Blender ➔ Real-time lighting, materials, and cinematic rendering in Unreal Engine 5'
 gallery:
