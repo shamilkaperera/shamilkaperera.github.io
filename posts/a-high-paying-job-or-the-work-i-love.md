@@ -4,6 +4,8 @@ thumbnail: /images/Screenshot 2026-03-31 152050.png
 date: 2026-03-31T14:56:00
 ---
 
+**Does It Matter: A High-Paying Job or the Work I Love?**
+
 There is a particular kind of question that does not leave you easily. It follows you into quiet moments, sits beside you during late-night study sessions, and lingers in the background of even your most productive days. I have been living with such a question for some time now.
 
 As a Mechanical Engineering student at the University of Peradeniya, I am walking a path that many would consider ideal. It offers structure, stability, and the promise of a strong income. From a societal perspective, it is the definition of success. Yet, beneath this structured journey, there exists another force within me, something less predictable but far more compelling. That force is my passion for content creation.
@@ -70,34 +72,6 @@ This gives me the freedom to:
 - Build an authentic creative identity
 
 In this way, my engineering career becomes the foundation, while content creation becomes the structure I gradually build upon it.
-
-***
-
-### Redefining Success
-
-The more I reflect, the more I realize that success is not about choosing one path over another. It is about aligning different phases of life with different goals.
-
-Right now, my goal is to build stability and begin earning. At the same time, I am planting the seeds of something more personal and meaningful.
-
-Eventually, there will come a point where my passion grows strong enough to stand independently. When that moment arrives, the transition will not be uncertain. It will be prepared.
-
-***
-
-### Final Reflection
-
-So, does it matter whether I choose a high-paying job or the work I love?
-
-Yes, it matters. But not as a single decision made in one moment.
-
-It matters how I balance them.
-It matters how I use one to support the other.
-It matters how patiently I build the life I truly want.
-
-I am not choosing between money and passion.
-
-I am choosing a path where both can exist, at different times, serving different purposes.
-
-And perhaps that is the most realistic and powerful choice of all.
 
 ![](/images/Screenshot%202026-03-31%20152115.png)
 
