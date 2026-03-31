@@ -1,6 +1,6 @@
 ---
 title: A High-Paying Job or the Work I Love?
-thumbnail: /images/Gemini_Generated_Image_xh8u36xh8u36xh8u.png
+thumbnail: /images/Screenshot 2026-03-31 152050.png
 date: 2026-03-31T14:56:00
 ---
 
@@ -28,7 +28,7 @@ In contrast, purely income-driven careers may satisfy competence and security, b
 
 This explains why choosing only one side often feels incomplete.
 
-![](/images/Gemini_Generated_Image_5f5g6l5f5g6l5f5g.png)
+![](/images/Screenshot%202026-03-31%20152106.png)
 
 ***
 
@@ -71,7 +71,7 @@ This gives me the freedom to:
 
 In this way, my engineering career becomes the foundation, while content creation becomes the structure I gradually build upon it.
 
-![](/images/Gemini_Generated_Image_kvw2c9kvw2c9kvw2.png)
+![](/images/Screenshot%202026-03-31%20152115.png)
 
 ***
 
