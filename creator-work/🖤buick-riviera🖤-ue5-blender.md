@@ -1,5 +1,6 @@
 ---
 title: 🖤Buick Riviera🖤 UE5 Blender
+date: 2024-07-31T14:09:00
 thumbnail: /images/475073738_122229602762068965_4285202780255082697_n.jpg
 description: A vintage Buick Riviera stranded in the desert heat. Built and rendered using Blender for modeling and Unreal Engine 5 for the final environment, lighting, and cinematic composition
 gallery:
