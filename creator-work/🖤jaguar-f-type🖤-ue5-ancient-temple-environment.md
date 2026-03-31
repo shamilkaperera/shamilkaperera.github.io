@@ -11,4 +11,4 @@ gallery:
   - /images/579885519_122282509832068965_6873237698107563417_n.jpg
 ---
 
-Note: Just a quick showcase, not a tutorial!
+Just a quick showcase, not a tutorial!
