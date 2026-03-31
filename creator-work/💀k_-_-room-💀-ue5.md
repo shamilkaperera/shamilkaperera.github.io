@@ -1,5 +1,5 @@
 ---
-title: 💀K_ _ ROOM 💀 UE5
+title: 💀K_ _ ROOM💀 UE5
 thumbnail: /images/474215242_122228560292068965_5875056456095867216_n.jpg
 description: A tense, narrative-driven thriller environment titled 'K_ _ ROOM'. Designed, lit, and rendered entirely in Unreal Engine 5, focusing on atmospheric tension and environmental storytelling through leftover evidence.
 gallery:
