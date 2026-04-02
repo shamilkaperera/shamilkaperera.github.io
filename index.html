@@ -328,6 +328,20 @@
             text = text.replace(/^- (.*)$/gm, '<li class="ml-5 list-disc text-gray-300 mb-2">$1</li>');
             text = text.replace(/(<li class="ml-5 list-disc text-gray-300 mb-2">.*?<\/li>)/gs, '<ul class="mb-6 space-y-2">$1</ul>');
 
+            // --- AUTO-LINK URL DETECTION ---
+            // Matches http://, https://, and www. links, converts to clickable anchors
+            text = text.replace(
+                /\b(https?:\/\/[^\s<>"{}|\\^`\[\]]+|www\.[^\s<>"{}|\\^`\[\]]+)/gi,
+                (match) => {
+                    // Ensure URL has protocol for proper linking
+                    const url = match.startsWith('http') ? match : `https://${match}`;
+                    // Truncate long URLs for cleaner display
+                    const display = match.length > 50 ? match.substring(0, 47) + '...' : match;
+                    // Return styled anchor tag with Tailwind classes
+                    return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 underline decoration-blue-400/50 hover:decoration-blue-300 transition break-all">${display}</a>`;
+                }
+            );
+
             // Split into blocks
             const blocks = text.split(/\n\s*\n/);
             const processed = blocks.map(block => {
