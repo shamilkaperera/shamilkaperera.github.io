@@ -8,6 +8,10 @@ gallery:
   - /images/Screenshot 2026-04-03 010645.png
 ---
 
+files = https://drive.google.com/file/d/14GpgYVRbTxeh8C1l-7W-KtJpAv9S88gL/view?usp=sharing
+
+video = https://youtu.be/tUqmCrGomtw?si=k-FWJJ9smFkjHHKu
+
 This project explores the intersection of **Computer Vision** and intuitive **Human-Computer Interaction (HCI)**. Developed using **Python**, **OpenCV**, and **MediaPipe**, the system transforms a standard webcam into a high-precision digital canvas, allowing users to write and interact with a UI in 3D space without physical contact.
 
 ### **Technical Architecture**
