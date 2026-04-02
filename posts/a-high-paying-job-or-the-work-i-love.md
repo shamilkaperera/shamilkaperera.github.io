@@ -1,7 +1,7 @@
 ---
 title: A High-Paying Job or the Work I Love?
 thumbnail: /images/Screenshot 2026-03-31 152050.png
-date: 2026-03-31T14:56:00
+date: 2026-03-25T18:35:00
 ---
 
 # Does It Matter: A High-Paying Job or the Work I Love?
