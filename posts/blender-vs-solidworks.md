@@ -14,8 +14,6 @@ You start with a sketch. Then dimensions. Then constraints. Then features.
 
 At first, it feels slower. But something important is happening under the surface.
 
-***
-
 ## It Is Not About Shapes. It Is About Control
 
 ![https://cdn.prod.website-files.com/5fcde6f56fdac5414b34eeb3/689f040bb0894d1de0c18cd2_67c82384ab2146707dd61fbf_sketching-3.png](https://cdn.prod.website-files.com/5fcde6f56fdac5414b34eeb3/689f040bb0894d1de0c18cd2_67c82384ab2146707dd61fbf_sketching-3.png)
@@ -32,11 +30,7 @@ In SolidWorks, you are not really editing the shape. You are editing the rules t
 So one works on outcome.
 The other works on intention.
 
-***
-
 ## The Hidden Cost of Freedom
-
-
 
 Blender feels free because nothing stops you. But that freedom has a cost.
 
@@ -48,8 +42,6 @@ In simple terms:
 
 Blender lets you go fast early, slow later.
 SolidWorks is slower early, faster later.
-
-***
 
 ## Precision Is Not Just About Units
 
@@ -65,8 +57,6 @@ This matters when something must fit, rotate, seal, or move in real life.
 
 Blender creates what looks correct.
 SolidWorks creates what behaves correct.
-
-***
 
 ## The Real Divide
 
