@@ -41,7 +41,7 @@ SolidWorks feels strict because everything must be defined. But once it is fully
 In simple terms:
 
 Blender lets you go fast early, slow later.
-SolidWorks is slower early, faster later.
+SolidWorks is slower early, faster later
 
 ## Precision Is Not Just About Units
 
