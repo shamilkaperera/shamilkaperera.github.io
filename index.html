@@ -481,21 +481,37 @@
 
         // --- DISQUS INITIALIZATION ---
         function initDisqus(pageTitle) {
+            // Replace with your actual Disqus shortname
             const disqus_shortname = 'shamilkaperera'; 
             
+            // 1. Create a clean, URL-safe slug from the title
+            const uniqueSlug = pageTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+            
+            // 2. Create a unique URL for this specific modal
+            // We use the base URL of your site, and append the slug as a query parameter or hash path.
+            // Example: https://yoursite.com/?post=my-awesome-project
+            const baseUrl = window.location.origin + window.location.pathname;
+            const uniqueUrl = baseUrl + "?post=" + uniqueSlug;
+            
+            // 3. Create a unique identifier
+            // This is the most important part for Disqus to tell pages apart.
+            const uniqueIdentifier = "post_" + uniqueSlug;
+
             if (window.DISQUS) {
+                // If Disqus is already loaded, we just reset it with the new post's data
                 DISQUS.reset({
                     reload: true,
                     config: function () {  
-                        this.page.identifier = pageTitle;  
-                        this.page.url = window.location.href.split('#')[0] + "#" + pageTitle.replace(/[^a-zA-Z0-9]/g, '-');
+                        this.page.identifier = uniqueIdentifier;  
+                        this.page.url = uniqueUrl;
                         this.page.title = pageTitle;
                     }
                 });
             } else {
+                // If it's the first time opening a modal, we initialize Disqus
                 window.disqus_config = function () {
-                    this.page.identifier = pageTitle;
-                    this.page.url = window.location.href.split('#')[0] + "#" + pageTitle.replace(/[^a-zA-Z0-9]/g, '-');
+                    this.page.identifier = uniqueIdentifier;
+                    this.page.url = uniqueUrl;
                     this.page.title = pageTitle;
                 };
                 (function() {
