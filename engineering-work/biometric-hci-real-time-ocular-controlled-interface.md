@@ -10,7 +10,7 @@ gallery:
 
 files=https://drive.google.com/file/d/1WNtqPwRA7aqaHkOS4ssfWj0Y9iL9M0R6/view?usp=sharing
 
-video = https://youtu.be/fW4aA76ArdA?si=5a8gxq3XBpr-HYjj
+video = https://youtu.be/O4fOevrHMyU
 
 ### **Ocular Tracking & Cursor Kinematics**
 
