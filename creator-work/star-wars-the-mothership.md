@@ -8,4 +8,4 @@ gallery:
   - /images/Screenshot 2026-03-31 140327.png
 ---
 
-video link = https://youtu.be/uPncW2N77xs?si=8J3C0sAlOFfJq87b
+video link = https://youtu.be/XdVdZtEnZ2Q
