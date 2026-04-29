@@ -10,6 +10,8 @@ I don't know the exact reason for it. Back in Grade 9, I had a cyst inside my ey
 
 I've gone through 5 pairs of glasses this way. Since the decline was gradual, it wasn't a huge issue at first. However, during this recent New Year season, things changed drastically. Now, when I take my glasses off, I can't even see 5 meters ahead. Because of this, I started looking into vision loss a bit more.
 
+![](/images/Gemini_Generated_Image_g5k147g5k147g5k1.png)
+
 the story of myopia, there is a plot twist. The eyeball itself decides to overachieve and grows just a fraction of a millimeter too long from front to back, or the clear cornea at the front becomes a little too curved. Because this space is too long, the light rays cross paths and focus before they actually hit the screen.
 
 This condition usually makes its debut in childhood. As kids grow taller, their eyes can stretch along with them. This creates a recurring storyline of needing stronger glasses or contacts every year or two. This progression usually only settles down once the body stops growing in the late teens or early twenties.
