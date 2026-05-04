@@ -169,10 +169,11 @@
                 <h2 class="text-4xl font-black mb-2 text-center text-white tracking-tight">Let's Collaborate</h2>
                 <p class="text-center text-gray-400 mb-8 font-light">Have an engineering problem or a creative vision? Reach out.</p>
 
-                <form onsubmit="event.preventDefault(); alert('Message logged!');" class="relative z-10">
-                    <div class="mb-5"><input type="text" class="w-full bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-blue-500 transition placeholder-gray-500" placeholder="Your Name"></div>
-                    <div class="mb-5"><input type="email" class="w-full bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-blue-500 transition placeholder-gray-500" placeholder="Email Address"></div>
-                    <div class="mb-8"><textarea class="w-full bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-blue-500 transition placeholder-gray-500 h-40 resize-none" placeholder="Tell me about your project..."></textarea></div>
+                <!-- ✅ FIXED CONTACT FORM - SENDS TO connectshamilkaperera@gmail.com -->
+                <form action="https://formspree.io/f/xvgjqlpd" method="POST" class="relative z-10">
+                    <div class="mb-5"><input type="text" name="name" required class="w-full bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-blue-500 transition placeholder-gray-500" placeholder="Your Name"></div>
+                    <div class="mb-5"><input type="email" name="email" required class="w-full bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-blue-500 transition placeholder-gray-500" placeholder="Email Address"></div>
+                    <div class="mb-8"><textarea name="message" required class="w-full bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-blue-500 transition placeholder-gray-500 h-40 resize-none" placeholder="Tell me about your project..."></textarea></div>
                     <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-emerald-600 hover:from-blue-500 hover:to-emerald-500 text-white font-bold py-4 rounded-xl transition shadow-[0_0_20px_rgba(16,185,129,0.3)] uppercase tracking-widest">Send Message</button>
                 </form>
             </div>
