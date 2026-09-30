@@ -14,6 +14,8 @@ LINK = [https://shamilkaperera.github.io/lab-report-cover-page/](https://shamilk
 
 ![](/images/pasted-image-1790794690684.png)
 
+HTML = [https://drive.google.com/file/d/1vIkQixqCHKJvJC-AR9UbzcW82CQxcxyi/view?usp=drive_link](https://drive.google.com/file/d/1vIkQixqCHKJvJC-AR9UbzcW82CQxcxyi/view?usp=drive_link)
+
 **Key Technical Features:**
 
 - **Algorithmic Typography:** The application does not load any `.ttf` or `.otf` files. Every letter, number, and symbol is mathematically drawn using an ultra-dense array of X/Y vector coordinates mapped to a 10x8 grid.
