@@ -6,6 +6,8 @@ description: I built a purely client-side web application that generates millime
 gallery: []
 ---
 
+LINK = [https://shamilkaperera.github.io/lab-report-cover-page/](https://shamilkaperera.github.io/lab-report-cover-page/)
+
 **The Problem:** Standard web fonts contain invisible bounding boxes (ascenders and descenders) that make it impossible to guarantee exact physical print dimensions. When university engineering departments require lab report cover pages with strictly enforced millimeter heights (e.g., exactly 10mm for titles, 5mm for names) and exact line spacing, standard HTML-to-PDF converters fail.
 
 **The Solution:** I built a purely client-side web application that generates millimeter-perfect A4 PDF cover pages. Instead of using standard fonts, I collaborated with AI to engineer a custom **Simplex Vector Font Engine** in JavaScript.
