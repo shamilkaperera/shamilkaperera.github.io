@@ -14,7 +14,7 @@ LINK = [https://shamilkaperera.github.io/lab-report-cover-page/](https://shamilk
 
 ![](/images/pasted-image-1790794690684.png)
 
-HTML = [https://drive.google.com/file/d/1vIkQixqCHKJvJC-AR9UbzcW82CQxcxyi/view?usp=drive_link](https://drive.google.com/file/d/1vIkQixqCHKJvJC-AR9UbzcW82CQxcxyi/view?usp=drive_link)
+HTML = [https://drive.google.com/drive/u/2/folders/1EUfuoHvlp0j_ujMylYY-IQKILEzy2W78](https://drive.google.com/drive/u/2/folders/1EUfuoHvlp0j_ujMylYY-IQKILEzy2W78)
 
 **Key Technical Features:**
 
