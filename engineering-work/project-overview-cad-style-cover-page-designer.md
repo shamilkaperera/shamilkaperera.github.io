@@ -6,7 +6,7 @@ description: I built a purely client-side web application that generates millime
 gallery: []
 ---
 
-LINK = "[https://shamilkaperera.github.io/lab-report-cover-page/](https://shamilkaperera.github.io/lab-report-cover-page/)"
+LINK = '[https://shamilkaperera.github.io/lab-report-cover-page/](https://shamilkaperera.github.io/lab-report-cover-page/)'
 
 **The Problem:** Standard web fonts contain invisible bounding boxes (ascenders and descenders) that make it impossible to guarantee exact physical print dimensions. When university engineering departments require lab report cover pages with strictly enforced millimeter heights (e.g., exactly 10mm for titles, 5mm for names) and exact line spacing, standard HTML-to-PDF converters fail. 
 
@@ -14,7 +14,7 @@ LINK = "[https://shamilkaperera.github.io/lab-report-cover-page/](https://shamil
 
 ![](/images/pasted-image-1790794690684.png)
 
-HTML = "[https://drive.google.com/drive/u/2/folders/1EUfuoHvlp0j_ujMylYY-IQKILEzy2W78](https://drive.google.com/drive/u/2/folders/1EUfuoHvlp0j_ujMylYY-IQKILEzy2W78)"
+HTML = '[https://drive.google.com/drive/u/2/folders/1EUfuoHvlp0j_ujMylYY-IQKILEzy2W78](https://drive.google.com/drive/u/2/folders/1EUfuoHvlp0j_ujMylYY-IQKILEzy2W78)'
 
 **Key Technical Features:**
 
